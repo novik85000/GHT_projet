@@ -158,6 +158,17 @@ public class Utilisateur {
 	public void setAdministrateur(byte administrateur) {
 		this.administrateur = administrateur;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Utilisateur [no_Utilisateur=" + no_Utilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
+				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", code_Postal="
+				+ code_Postal + ", ville=" + ville + ", mot_de_passe=" + mot_de_passe + ", credit=" + credit
+				+ ", administrateur=" + administrateur + "]";
+	}
+	
+	
 	
 	
 	
