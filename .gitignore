@@ -19,4 +19,9 @@ hs_err_pid*
 # Eclipse
 .project
 .classpath
+<<<<<<< HEAD
 .settings
+=======
+.settings
+>>>>>>> branch 'main' of https://github.com/novik85000/GHT_projet2.git
+/build/
