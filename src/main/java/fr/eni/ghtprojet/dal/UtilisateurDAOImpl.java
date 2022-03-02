@@ -48,6 +48,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 			
 			stmt.executeUpdate();
 			connection.close();
+			System.out.println("insertion réussi");
 			isInsere = true;
 			
 			
