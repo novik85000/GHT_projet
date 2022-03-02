@@ -7,6 +7,11 @@
 <title>Se connecter</title>
 </head>
 <body>
+<%!private String erreur = ""; %>
+
+ <% if (request.getAttribute("messageError")!=null){
+	 	erreur = (String) request.getAttribute("messageError");
+ }%>
 <h1>ENI-ENCHERES</h1>
 	    <form action="<%= request.getContextPath() %>/connecter" method="post">
 	        <div class="form-control">
@@ -18,8 +23,12 @@
 	        <button type="submit">Connexion</button>
    	 	</form> 
    	 
-   	 <button>
-   	 <a href="<%=request.getContextPath()%>/connecter">Créer un compte</a>
-   	 </button>
+   	 
+   	 <a href="<%= request.getContextPath() %>/inscription">
+	   	 <button type="button"> 
+	   	 	Créer un compte
+	   	 </button>
+   	 </a>
+   	 <h3> <%=erreur%> </h3>
 </body>
 </html>

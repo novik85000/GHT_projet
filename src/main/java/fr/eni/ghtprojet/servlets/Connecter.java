@@ -43,12 +43,14 @@ public class Connecter extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
 		
-		String pseudo = "felix";
-		String email = "fbluth@campus.fr";
-		String mot_de_passe = "Pa$$w0rd";
+		String pseudo = request.getParameter("identifiant").toLowerCase().trim();
+		String mot_de_passe = request.getParameter("mdp").trim();
+		String email = pseudo;
 		Utilisateur user = null;
+		boolean isFound = false;
+		String messageError =" ";
+	
 		
 		
 		try {
@@ -61,6 +63,25 @@ public class Connecter extends HttpServlet {
 		}
 		
 		
-	}
-
+		
+		if (user!= null && pseudo.equals(user.getPseudo())&& mot_de_passe.equals(user.getMot_de_passe())) {
+		System.out.println("user existe");
+		isFound = true;
+		request.setAttribute("messageError", messageError);
+		response.sendRedirect(request.getContextPath()+"/accueil_servlet");
+		}
+		else {
+			System.out.println("user existe pas");
+			isFound = false;
+			messageError = "Mot de passe et/ou login incorrect";
+			request.setAttribute("messageError", messageError);
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/pagelogin.jsp");
+			rd.forward(request, response);
+			
+			
+			}
+		
+		}
+	
+	
 }

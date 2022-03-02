@@ -17,6 +17,14 @@
 	 	<servlet-name>se_connecter</servlet-name>
 	 	<url-pattern>/connexion</url-pattern>
 	</servlet-mapping>
+	<servlet>
+	  <servlet-name>page_inscription</servlet-name>
+	  <jsp-file>/WEB-INF/jsp/pageinscription.jsp</jsp-file>
+  </servlet>
+	<servlet-mapping>
+	 	<servlet-name>page_inscription</servlet-name>
+	 	<url-pattern>/inscription</url-pattern>
+	</servlet-mapping>
 	
 	  <welcome-file-list>
   		  <welcome-file>accueil_servlet</welcome-file>
