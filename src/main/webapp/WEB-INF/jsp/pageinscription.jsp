@@ -7,17 +7,22 @@
 <title>Inscription</title>
 </head>
 <body>
+<%!private String erreur = ""; %>
+
+ <% if (request.getAttribute("messageErreur")!=null){
+	 	erreur = (String) request.getAttribute("messageErreur");
+ }%>
 <h1>ENI-ENCHERES</h1>
 	    <form action="<%= request.getContextPath() %>/inscrire" method="post">
 	        <div class="form-control">
-	         <label for="identifiant">Pseudo:</label> 
+	         <label for="pseudo">Pseudo:</label> 
 	        <input type='text' name='pseudo'> <br>
 	         <label for="prenom">prénom:</label> 
 	        <input type='text' name='prenom'><br>
 	         <label for="telephone">telephone:</label>
 	        <input type='text' name='telephone'><br>
 	         <label for="code_postal">code postal:</label> 
-	        <input type='text' name='code postal'><br>
+	        <input type='text' name='code_postal'><br>
 	         <label for="mdp">mot de passe:</label> 
 	        <input type='password' name='mdp'><br>
 	         <label for="nom">nom</label> 
@@ -34,6 +39,8 @@
 	        <button type="submit">Créer</button><br>
 	         <button type="reset">Annuler</button>
    	 	</form> 
+   	 	<h3> <%=erreur%> </h3>
+   	 	
    	
  
 </body>

@@ -24,7 +24,6 @@ public class Utilisateur {
 	
 	public Utilisateur(int no_Utilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String code_Postal, String ville, String mot_de_passe, int credit, byte administrateur) {
-		super();
 		this.no_Utilisateur = no_Utilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -37,6 +36,35 @@ public class Utilisateur {
 		this.mot_de_passe = mot_de_passe;
 		this.credit = credit;
 		this.administrateur = administrateur;
+	}
+	
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String code_Postal, String ville, String mot_de_passe, int credit, byte administrateur) {
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.telephone = telephone;
+		this.rue = rue;
+		this.code_Postal = code_Postal;
+		this.ville = ville;
+		this.mot_de_passe = mot_de_passe;
+		this.credit = credit;
+		this.administrateur = administrateur;
+	}
+	
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String code_Postal, String ville, String mot_de_passe, int credit) {
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.telephone = telephone;
+		this.rue = rue;
+		this.code_Postal = code_Postal;
+		this.ville = ville;
+		this.mot_de_passe = mot_de_passe;
+		this.credit = credit;
 	}
 
 
