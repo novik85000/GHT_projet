@@ -14,7 +14,9 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	private final static String SQL_SE_CONNECTER = "select * from UTILISATEURS where pseudo=? or email=? and mot_de_passe=?";
 	
 	private final static String SQL_INSERT_UTILISATEUR = "insert INTO UTILISATEURS (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit) VALUES (?,?,?,?,?,?, ?, ?,?,?)";
-	
+	 private final static String SQL_UPDATE_UTILISATEUR = "UPDATE UTILISATEURS \r\n"
+	 		+ "set pseudo = ?, prenom=?, telephone=?,code_postal=?,mot_de_passe=?,nom=?, email=?, rue=?, ville=?\r\n"
+	 		+ "where no_utilisateur = ?";
 	public static boolean isUnique = true;
 
 	
@@ -84,7 +86,36 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 
 	@Override
 	public void update(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		System.out.println("connection a reussi");
+	
+			try {
+				connection = Connexion.getConnection();
+				stmt = connection.prepareStatement(SQL_UPDATE_UTILISATEUR);
+				stmt.setString(1, utilisateur.getPseudo());
+				stmt.setString(2, utilisateur.getPrenom());
+				stmt.setString(3, utilisateur.getTelephone());
+				stmt.setString(4, utilisateur.getCode_Postal());
+				stmt.setString(5, utilisateur.getMot_de_passe());
+				stmt.setString(6, utilisateur.getNom());
+				stmt.setString(7, utilisateur.getEmail());
+				stmt.setString(8, utilisateur.getRue());
+				stmt.setString(9, utilisateur.getVille());
+				stmt.setInt(10, utilisateur.getNo_Utilisateur());
+				System.out.println("set de statement a reussi");
+				
+				stmt.executeUpdate();
+				connection.close();
+				System.out.println("Update réussi");
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		
+		
 		
 	}
 

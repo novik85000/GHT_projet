@@ -33,5 +33,10 @@ public class UtilisateurManager {
 		dao.insert(utilisateur);
 	
 	}
+	
+	public void update(Utilisateur utilisateur) throws SQLException {
+		dao.update(utilisateur);
+	
+	}
 }
 
