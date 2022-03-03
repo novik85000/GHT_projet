@@ -24,7 +24,7 @@ public class ModifierProfil extends HttpServlet {
        
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/pagemodifier.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/modifierprofil.jsp");
 		rd.forward(request, response);
 	}
 
@@ -54,7 +54,7 @@ public class ModifierProfil extends HttpServlet {
 		}
 		
 		if (nouveau_mot_de_passe.equals(confirmation)) {
-			System.out.println("mot_de_passe et confirmation sont égaux");
+			System.out.println("mot_de_passe et confirmation sont ï¿½gaux");
 			Utilisateur userUpdate = new Utilisateur (user.getNo_Utilisateur(), pseudo, nom, prenom, email, telephone, rue, code_Postal, ville, nouveau_mot_de_passe);
 			request.setAttribute("messageErreur", messageErreur);
 			
