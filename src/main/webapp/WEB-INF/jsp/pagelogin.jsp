@@ -24,7 +24,7 @@
    	 	</form> 
    	 
    	 
-   	 <a href="<%= request.getContextPath() %>/inscription">
+   	 <a href="<%= request.getContextPath() %>/inscrire">
 	   	 <button type="button"> 
 	   	 	Créer un compte
 	   	 </button>

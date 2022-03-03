@@ -54,14 +54,15 @@ public class ModifierProfil extends HttpServlet {
 		}
 		
 		if (nouveau_mot_de_passe.equals(confirmation)) {
-			
-			user = new Utilisateur ("Tatianaaaa", nom, prenom, email, telephone, rue, code_Postal, ville, nouveau_mot_de_passe, credit);
+			System.out.println("mot_de_passe et confirmation sont égaux");
+			Utilisateur userUpdate = new Utilisateur (user.getNo_Utilisateur(), pseudo, nom, prenom, email, telephone, rue, code_Postal, ville, nouveau_mot_de_passe);
 			request.setAttribute("messageErreur", messageErreur);
 			
 			
 			try {
 				UtilisateurManager mger = new UtilisateurManager();
-				mger.update(user);
+				mger.update(userUpdate);
+				System.out.println(userUpdate);
 				
 			/*	if (UtilisateurDAOImpl.isUnique == false) {
 					messageErreur = "Pseudo ou email dï¿½jï¿½ utilisï¿½s";
