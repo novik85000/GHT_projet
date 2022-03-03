@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.catalina.Session;
 
 import fr.eni.ghtprojet.bll.UtilisateurManager;
 import fr.eni.ghtprojet.bo.Utilisateur;
@@ -19,6 +22,8 @@ import fr.eni.ghtprojet.dal.UtilisateurDAOImpl;
 @WebServlet("/connecter")
 public class Connecter extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	Utilisateur user = null;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -43,11 +48,10 @@ public class Connecter extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		HttpSession mySession = request. getSession();
 		String pseudo = request.getParameter("identifiant").toLowerCase().trim();
 		String mot_de_passe = request.getParameter("mdp").trim();
 		String email = pseudo;
-		Utilisateur user = null;
 		boolean isFound = false;
 		String messageError =" ";
 	
@@ -56,6 +60,7 @@ public class Connecter extends HttpServlet {
 		try {
 			UtilisateurManager mger = new UtilisateurManager();
 			user = mger.seConnecter(pseudo, email, mot_de_passe);
+			mySession.setAttribute("user", user);
 			//System.out.println(user);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -68,7 +73,7 @@ public class Connecter extends HttpServlet {
 		System.out.println("user existe");
 		isFound = true;
 		request.setAttribute("messageError", messageError);
-		response.sendRedirect(request.getContextPath()+"/accueil_servlet");
+		response.sendRedirect(request.getContextPath()+"/accueillirConnecte");
 		}
 		else {
 			System.out.println("user existe pas");

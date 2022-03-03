@@ -16,9 +16,9 @@
 	    <form action="<%= request.getContextPath() %>/connecter" method="post">
 	        <div class="form-control">
 	         <label for="identifiant">Identifiant:</label>
-	        <input type='text' name='identifiant'> <br>
+	        <input type='text' name='identifiant' required="required"> <br>
 	         <label for="mdp">Mot de passe:</label> 
-	        <input type='password' name='mdp'>
+	        <input type='password' name='mdp' required="required">
 	        </div>
 	        <button type="submit">Connexion</button>
    	 	</form> 
