@@ -15,7 +15,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	
 	private final static String SQL_INSERT_UTILISATEUR = "insert INTO UTILISATEURS (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit) VALUES (?,?,?,?,?,?, ?, ?,?,?)";
 	
-	public static boolean isInsere = false;
+	public static boolean isUnique = true;
 
 	
 	
@@ -48,16 +48,23 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 			
 			stmt.executeUpdate();
 			connection.close();
-			System.out.println("Insertion d'utilisateur a reussi");
 			System.out.println("insertion réussi");
-			isInsere = true;
 			
 			
 			
 		}
 		catch (Exception e) {
-			System.out.println("Insertion n'ai pas reussi");
-			isInsere = false;
+			int index = e.getMessage().indexOf("UNIQUE");
+			if (index == - 1) {
+				System.out.println("Login ou email est UNIQUE");
+			}
+			else {
+				System.out.println("Login ou email n'est pas UNIQUE");
+				isUnique = false;
+			}
+			System.out.println("Insertion n'ai pas reussi" + "/n" + e.getMessage());
+			
+			
 			
 		}
 		

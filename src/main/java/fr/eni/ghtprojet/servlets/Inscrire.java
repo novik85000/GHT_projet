@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.ghtprojet.bll.UtilisateurManager;
 import fr.eni.ghtprojet.bo.Utilisateur;
+import fr.eni.ghtprojet.dal.UtilisateurDAOImpl;
 
 /**
  * Servlet implementation class Inscrire
@@ -65,13 +66,25 @@ public class Inscrire extends HttpServlet {
 			try {
 				UtilisateurManager mger = new UtilisateurManager();
 				mger.insert(user);
+				if (UtilisateurDAOImpl.isUnique == false) {
+					messageErreur = "Pseudo ou email déjà utilisés";
+					request.setAttribute("messageErreur", messageErreur);
+					System.out.println(UtilisateurDAOImpl.isUnique);
+					UtilisateurDAOImpl.isUnique = true;
+					request.getRequestDispatcher("/WEB-INF/jsp/pageinscription.jsp").forward(request, response);
+				}
+				else {
+					request.getRequestDispatcher("/WEB-INF/jsp/pageaccueil.jsp").forward(request, response);
+					System.out.println(UtilisateurDAOImpl.isUnique);
+				}
+					
+		
 				
 				
 			} catch (Exception e) {
 				e.printStackTrace();
+		
 			}
-			
-			request.getRequestDispatcher("/WEB-INF/jsp/pageaccueil.jsp").forward(request, response);
 			
 		} else {
 			messageErreur = "Motes de passe ne sont pas identiques";
@@ -84,9 +97,7 @@ public class Inscrire extends HttpServlet {
 		
 		
 		System.out.println(user);
-		
-		
-	}
 
+}
 }
 

@@ -16,25 +16,25 @@
 	    <form action="<%= request.getContextPath() %>/inscrire" method="post">
 	        <div class="form-control">
 	         <label for="pseudo">Pseudo:</label> 
-	        <input type='text' name='pseudo'> <br>
+	        <input type='text' name ='pseudo' required="required"> <br>
 	         <label for="prenom">prénom:</label> 
-	        <input type='text' name='prenom'><br>
+	        <input type='text' name='prenom' required="required"><br>
 	         <label for="telephone">telephone:</label>
 	        <input type='text' name='telephone'><br>
 	         <label for="code_postal">code postal:</label> 
-	        <input type='text' name='code_postal'><br>
+	        <input type='text' name='code_postal' required="required"><br>
 	         <label for="mdp">mot de passe:</label> 
-	        <input type='password' name='mdp'><br>
+	        <input type='password' name='mdp' required="required"><br>
 	         <label for="nom">nom</label> 
-	        <input type='text' name='nom'><br>
+	        <input type='text' name='nom' required="required"><br>
 	         <label for="email">email</label> 
-	        <input type='email' name='email'><br>
+	        <input type='email' name='email' required="required"><br>
 	         <label for="rue">rue:</label> 
-	        <input type='text' name='rue'><br>
+	        <input type='text' name='rue' required="required"><br>
 	         <label for="ville">ville:</label> 
-	        <input type='text' name='ville'><br>
+	        <input type='text' name='ville' required="required"><br>
 	         <label for="confirmation">confirmation:</label> 
-	        <input type='password' name='confirmation'><br>
+	        <input type='password' name='confirmation' required="required"><br>
 	        </div>
 	        <button type="submit">Créer</button><br>
 	         <button type="reset">Annuler</button>
