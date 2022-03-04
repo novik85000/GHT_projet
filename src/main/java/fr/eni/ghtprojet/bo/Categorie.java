@@ -20,5 +20,9 @@ public String getLibelle() {
 public void setLibelle(String libelle) {
 	this.libelle = libelle;
 }
+@Override
+public String toString() {
+	return "Categorie [no_Categorie=" + no_Categorie + ", libelle=" + libelle + "]";
+}
 
 }
