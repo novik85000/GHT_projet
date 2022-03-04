@@ -133,7 +133,7 @@ public class ModifierProfil extends HttpServlet {
 				System.out.println(userUpdate);
 				request.setAttribute("messageErreur", messageErreur);
 				request.getSession().setAttribute("user", userUpdate);
-				response.sendRedirect(request.getContextPath() + "/afficherprofil");
+				//response.sendRedirect(request.getContextPath() + "/afficherprofil");
 			} catch (Exception e) {
 				e.printStackTrace();
 		
