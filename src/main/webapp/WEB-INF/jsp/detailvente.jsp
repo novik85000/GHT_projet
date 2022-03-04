@@ -11,7 +11,7 @@
 <h3>Détail vente</h3>
 <p>${Articles_vendus.getnomArticle()}</p>
 <p>Description : <input type='text'>
-<p>Catégorie : 
+<p>Catégorie : <input> type='text'>
 </body>
 
 </html>
