@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Encherir
  */
-@WebServlet("/Encherir")
+@WebServlet("/encherir")
 public class Encherir extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
