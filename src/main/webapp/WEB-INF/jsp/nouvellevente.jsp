@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>Nouvelle Vente </h1>
-<form action="<%= request.getContextPath() %>/inscrire" method="post">
+<form action="<%= request.getContextPath() %>/vendreobjet" method="post">
 	        <div class="form-control">
 	        <label for="Article">Article:</label> 
 	        <input type='text' name ='Article' required="required"> <br>
@@ -61,12 +61,8 @@
             </fieldset>            
             </div>
                 <br>     
-            
-            
-	        
-
 	        <button type="submit">Enregistrer</button><br>
-	         <button type="reset">Annuler</button>
+	        <button type="reset">Annuler</button>
    	 	</form> 
 </body>
 </html>
