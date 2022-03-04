@@ -50,7 +50,17 @@
                 <input type="date" id="dateFin" name="dateFin">
             </div>
                 <br>
-                
+            <div class="control-form">
+            <fieldset><p> Retrait : <p>
+                <label for="rue">Rue</label>
+                <input type="text" id="rue" name="rue"><br>
+                <label for="code_postal">Code Postal</label>
+                <input type="text" id="code_postal" name="code_postal"><br>
+                <label for="ville">Ville</label>
+                <input type="text" id="ville" name="ville">  <br>
+            </fieldset>            
+            </div>
+                <br>     
             
             
 	        
