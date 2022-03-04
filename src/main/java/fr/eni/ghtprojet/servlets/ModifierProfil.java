@@ -114,17 +114,27 @@ public class ModifierProfil extends HttpServlet {
 					response.sendRedirect(request.getContextPath() + "/modifierprofil");
 				}
 				
+				
+				
 			}
-			
+
 			
 			
 			try {
 				UtilisateurManager mger = new UtilisateurManager();
 				mger.update(userUpdate);
+				if (UtilisateurDAOImpl.isUnique == false) {
+					messageErreur = "Pseudo ou email d�j� utilis�s";
+					request.setAttribute("messageErreur", messageErreur);
+					System.out.println(UtilisateurDAOImpl.isUnique);
+					UtilisateurDAOImpl.isUnique = true;
+					response.sendRedirect(request.getContextPath() + "/modifierprofil");
+					System.out.println("message : "+ messageErreur);
+				}
 				System.out.println(userUpdate);
 				request.setAttribute("messageErreur", messageErreur);
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/consulterprofil.jsp");
-				rd.forward(request, response);
+				request.getSession().setAttribute("user", userUpdate);
+				response.sendRedirect(request.getContextPath() + "/afficherprofil");
 			} catch (Exception e) {
 				e.printStackTrace();
 		
@@ -134,6 +144,7 @@ public class ModifierProfil extends HttpServlet {
 			
 			messageErreur = "Le mot de passe n'est pas valide";
 			request.setAttribute("messageErreur", messageErreur);
+			response.sendRedirect(request.getContextPath() + "/modifierprofil");
 			
 		}
 		
@@ -145,4 +156,4 @@ public class ModifierProfil extends HttpServlet {
 		
 	} 
 	
-}
+	}

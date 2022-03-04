@@ -110,7 +110,15 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 				System.out.println("Update réussi");
 				
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				int index = e.getMessage().indexOf("UNIQUE");
+				if (index == - 1) {
+					System.out.println("Login ou email est UNIQUE");
+				}
+				else {
+					System.out.println("Login ou email n'est pas UNIQUE");
+					isUnique = false;
+				}
+				System.out.println("Insertion n'ai pas reussi" + "/n" + e.getMessage());
 				e.printStackTrace();
 			}
 			

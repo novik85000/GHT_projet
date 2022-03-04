@@ -38,6 +38,12 @@
 	        <button type="submit">Enregistrer</button><br>
 	         <button type="button" name ="IsSupprimer" value="true">Supprimer mon compte</button>
    	 	</form> 
-   	 	<h3><%= request.getAttribute("messageErreur") %></h3>
+   	 	<%!private String erreur = ""; %>
+
+ <% if (request.getAttribute("messageErreur")!=null){
+	 	erreur = (String) request.getAttribute("messageErreur");
+ }%>
+ 
+  <h3> <%=erreur%> </h3>
 </body>
 </html>
