@@ -21,7 +21,7 @@
 	         <label for="mdp">mot de passe actuel:</label> 
 	        <input type='password' name='mdp' required="required"><br>
 	        <label for="mdp">Nouveau mot de passe :</label> 
-	        <input type='password' name='mdpnew' required="required"><br>
+	        <input type='password' name='mdpnew'><br>
 	         <label for="nom">nom</label> 
 	        <input type='text' name='nom' ><br>
 	         <label for="email">email</label> 
@@ -31,12 +31,13 @@
 	         <label for="ville">ville:</label> 
 	        <input type='text' name='ville' ><br>
 	         <label for="confirmation">confirmation:</label> 
-	        <input type='password' name='confirmation' required="required"><br>
+	        <input type='password' name='confirmation'><br>
 	        <p>Crédit : ${user.getCredit()}</p>
 	        
 	        </div>
 	        <button type="submit">Enregistrer</button><br>
 	         <button type="button" name ="IsSupprimer" value="true">Supprimer mon compte</button>
    	 	</form> 
+   	 	<h3><%= request.getAttribute("messageErreur") %></h3>
 </body>
 </html>

@@ -1,6 +1,9 @@
 package fr.eni.ghtprojet.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,6 +24,7 @@ import fr.eni.ghtprojet.dal.UtilisateurDAOImpl;
 @WebServlet("/modifierprofil")
 public class ModifierProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	String isnewMDP = "non";
        
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,7 +35,7 @@ public class ModifierProfil extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		String pseudo = "Tatiiiiana"; //request.getParameter("pseudo").trim().toLowerCase(); 
+		String pseudo = request.getParameter("pseudo").trim().toLowerCase(); 
 		String nom = request.getParameter("nom").trim().toUpperCase();
 		String prenom = request.getParameter("prenom").trim().toUpperCase();
 		String email = request.getParameter("email").trim().toLowerCase();
@@ -44,51 +48,101 @@ public class ModifierProfil extends HttpServlet {
 		String confirmation = request.getParameter("confirmation").trim();
 		System.out.println((Utilisateur) request.getSession().getAttribute("user"));
 		
+		// Liste de nouveaux parametres
+		
+		List <String> listParamUserNew = new ArrayList<>();
+		listParamUserNew.add(pseudo);
+		listParamUserNew.add(nom);
+		listParamUserNew.add(prenom);
+		listParamUserNew.add(email);
+		listParamUserNew.add(telephone);
+		listParamUserNew.add(rue);
+		listParamUserNew.add(code_Postal);
+		listParamUserNew.add(ville);
+		listParamUserNew.add(nouveau_mot_de_passe);
+		
 		Utilisateur user = null;
 		String messageErreur = "";
 		user = ((Utilisateur) request.getSession().getAttribute("user"));
-		int credit = user.getCredit();
-		if(mot_de_passe.equals (user.getMot_de_passe())){
-			System.out.println(user.getMot_de_passe());
-			
+		
+		// Liste de parametres avant de changement
+		
+		List <String> listParamUser = new ArrayList<>();
+		
+		listParamUser.add(user.getPseudo());
+		listParamUser.add(user.getNom());
+		listParamUser.add(user.getPrenom());
+		listParamUser.add(user.getEmail());
+		listParamUser.add(user.getTelephone());
+		listParamUser.add(user.getRue());
+		listParamUser.add(user.getCode_Postal());
+		listParamUser.add(user.getVille());
+		listParamUser.add(user.getMot_de_passe());
+		
+		for (int i = 0; i < listParamUser.size(); i++) {
+			if (listParamUserNew.get(i) != null && listParamUserNew.get(i) != "") {
+				listParamUser.set(i, listParamUserNew.get(i));
+				System.out.println("champ " + listParamUser.get(i) + "n'est pas vide");
+			}
 		}
 		
-		if (nouveau_mot_de_passe.equals(confirmation)) {
-			System.out.println("mot_de_passe et confirmation sont �gaux");
-			Utilisateur userUpdate = new Utilisateur (user.getNo_Utilisateur(), pseudo, nom, prenom, email, telephone, rue, code_Postal, ville, nouveau_mot_de_passe);
-			request.setAttribute("messageErreur", messageErreur);
+			
+			
+		pseudo = listParamUser.get(0);
+		nom = listParamUser.get(1);
+		prenom = listParamUser.get(2);
+		email = listParamUser.get(3);
+		telephone = listParamUser.get(4);
+		rue = listParamUser.get(5);
+		code_Postal = listParamUser.get(6);
+		ville = listParamUser.get(7);
+		mot_de_passe = listParamUser.get(8);
+		
+		int credit = user.getCredit();
+		byte administrateur = user.getAdministrateur();
+		int no_utilisateur = user.getNo_Utilisateur();
+		
+		if ( request.getParameter("mdp").trim().equals(user.getMot_de_passe())) {
+			Utilisateur userUpdate = new Utilisateur (no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_Postal, ville, mot_de_passe);
+			System.out.println("user apres update" + userUpdate);
+			
+			if (request.getParameter("mdpnew").trim() != "" && request.getParameter("mdpnew").trim() != null) {
+				
+				if (request.getParameter("confirmation").trim().equals("") || request.getParameter("confirmation").trim() == null){
+					messageErreur = "Le confirmation est obligatoire";
+					request.setAttribute("messageErreur", messageErreur);
+					response.sendRedirect(request.getContextPath() + "/modifierprofil");
+				}
+				
+			}
+			
 			
 			
 			try {
 				UtilisateurManager mger = new UtilisateurManager();
 				mger.update(userUpdate);
 				System.out.println(userUpdate);
-				
-			/*	if (UtilisateurDAOImpl.isUnique == false) {
-					messageErreur = "Pseudo ou email d�j� utilis�s";
-					request.setAttribute("messageErreur", messageErreur);
-					System.out.println(UtilisateurDAOImpl.isUnique);
-					UtilisateurDAOImpl.isUnique = true;
-					request.getRequestDispatcher("/WEB-INF/jsp/pageinscription.jsp").forward(request, response);
-				}
-				else {
-					request.getRequestDispatcher("/WEB-INF/jsp/pageaccueil.jsp").forward(request, response);
-					System.out.println(UtilisateurDAOImpl.isUnique);
-				}
-				*/	
-		
-				
-				
+				request.setAttribute("messageErreur", messageErreur);
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/consulterprofil.jsp");
+				rd.forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 		
 			}
 			
-		/*} else {
-			messageErreur = "Motes de passe ne sont pas identiques";
+		} else {
+			
+			messageErreur = "Le mot de passe n'est pas valide";
 			request.setAttribute("messageErreur", messageErreur);
-			request.getRequestDispatcher("/WEB-INF/jsp/pageinscription.jsp").forward(request, response);
+			
 		}
-	}*/
-
-}}}
+		
+		
+		
+		
+		
+	
+		
+	} 
+	
+}
