@@ -24,7 +24,7 @@ import fr.eni.ghtprojet.dal.UtilisateurDAOImpl;
 @WebServlet("/modifierprofil")
 public class ModifierProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	String isnewMDP = "non";
+	String messageErreur = "";
        
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,7 +37,7 @@ public class ModifierProfil extends HttpServlet {
 	
 		String pseudo = request.getParameter("pseudo").trim().toLowerCase(); 
 		String nom = request.getParameter("nom").trim().toUpperCase();
-		String prenom = request.getParameter("prenom").trim().toUpperCase();
+		String prenom = request.getParameter("prenom").trim().toLowerCase();
 		String email = request.getParameter("email").trim().toLowerCase();
 		String telephone = request.getParameter("telephone").trim();
 		String rue = request.getParameter("rue").trim().toLowerCase();
@@ -62,7 +62,6 @@ public class ModifierProfil extends HttpServlet {
 		listParamUserNew.add(nouveau_mot_de_passe);
 		
 		Utilisateur user = null;
-		String messageErreur = "";
 		user = ((Utilisateur) request.getSession().getAttribute("user"));
 		
 		// Liste de parametres avant de changement
@@ -103,7 +102,7 @@ public class ModifierProfil extends HttpServlet {
 		int no_utilisateur = user.getNo_Utilisateur();
 		
 		if ( request.getParameter("mdp").trim().equals(user.getMot_de_passe())) {
-			Utilisateur userUpdate = new Utilisateur (no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_Postal, ville, mot_de_passe);
+			Utilisateur userUpdate = new Utilisateur (no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_Postal, ville, mot_de_passe, user.getCredit(), user.getAdministrateur());
 			System.out.println("user apres update" + userUpdate);
 			
 			if (request.getParameter("mdpnew").trim() != "" && request.getParameter("mdpnew").trim() != null) {
@@ -124,7 +123,7 @@ public class ModifierProfil extends HttpServlet {
 				UtilisateurManager mger = new UtilisateurManager();
 				mger.update(userUpdate);
 				if (UtilisateurDAOImpl.isUnique == false) {
-					messageErreur = "Pseudo ou email d�j� utilis�s";
+					messageErreur = "Pseudo ou email déjà utilisés";
 					request.setAttribute("messageErreur", messageErreur);
 					System.out.println(UtilisateurDAOImpl.isUnique);
 					UtilisateurDAOImpl.isUnique = true;
@@ -143,16 +142,12 @@ public class ModifierProfil extends HttpServlet {
 		} else {
 			
 			messageErreur = "Le mot de passe n'est pas valide";
-			request.setAttribute("messageErreur", messageErreur);
 			response.sendRedirect(request.getContextPath() + "/modifierprofil");
+			request.setAttribute("messageErreur", messageErreur);
 			
 		}
 		
 		
-		
-		
-		
-	
 		
 	} 
 	

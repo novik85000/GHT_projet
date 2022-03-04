@@ -44,7 +44,7 @@ public class Inscrire extends HttpServlet {
 		
 		String pseudo = request.getParameter("pseudo").trim().toLowerCase(); 
 		String nom = request.getParameter("nom").trim().toUpperCase();
-		String prenom = request.getParameter("prenom").trim().toUpperCase();
+		String prenom = request.getParameter("prenom").trim().toLowerCase();
 		String email = request.getParameter("email").trim().toLowerCase();
 		String telephone = request.getParameter("telephone").trim();
 		String rue = request.getParameter("rue").trim().toLowerCase();
@@ -67,7 +67,7 @@ public class Inscrire extends HttpServlet {
 				UtilisateurManager mger = new UtilisateurManager();
 				mger.insert(user);
 				if (UtilisateurDAOImpl.isUnique == false) {
-					messageErreur = "Pseudo ou email déjà utilisés";
+					messageErreur = "Pseudo ou email dï¿½jï¿½ utilisï¿½s";
 					request.setAttribute("messageErreur", messageErreur);
 					System.out.println(UtilisateurDAOImpl.isUnique);
 					UtilisateurDAOImpl.isUnique = true;

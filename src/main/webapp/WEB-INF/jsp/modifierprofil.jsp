@@ -36,14 +36,9 @@
 	        
 	        </div>
 	        <button type="submit">Enregistrer</button><br>
-	         <button type="button" name ="IsSupprimer" value="true">Supprimer mon compte</button>
-   	 	</form> 
-   	 	<%!private String erreur = ""; %>
-
- <% if (request.getAttribute("messageErreur")!=null){
-	 	erreur = (String) request.getAttribute("messageErreur");
- }%>
+	         <a href="<%=request.getContextPath()%>/supprimerprofil"><button type="button" name ="IsSupprimer" value="true">Supprimer mon compte</button></a>
+   	 	</form>
  
-  <h3> <%=erreur%> </h3>
+  <h3> ${messageErreur} </h3>
 </body>
 </html>
