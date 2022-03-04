@@ -38,5 +38,10 @@ public class UtilisateurManager {
 		dao.update(utilisateur);
 	
 	}
+	
+	public void delete (int no_utilisateur) throws SQLException {
+		dao.delete(no_utilisateur);
+	
+	}
 }
 

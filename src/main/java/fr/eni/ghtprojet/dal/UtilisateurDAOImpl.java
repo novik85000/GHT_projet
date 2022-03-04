@@ -17,6 +17,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	 private final static String SQL_UPDATE_UTILISATEUR = "UPDATE UTILISATEURS \r\n"
 	 		+ "set pseudo = ?, prenom=?, telephone=?,code_postal=?,mot_de_passe=?,nom=?, email=?, rue=?, ville=?\r\n"
 	 		+ "where no_utilisateur = ?";
+	private final static String SQL_DELETE  =  "delete from utilisateurs where no_utilisateur = ?";
 	public static boolean isUnique = true;
 
 	
@@ -129,7 +130,24 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 
 	@Override
 	public void delete(int no_utilisateur) {
-		// TODO Auto-generated method stub
+		Utilisateur user = null;
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		System.out.println("connection a reussi");
+
+		try {
+			connection = Connexion.getConnection();
+			stmt = connection.prepareStatement(SQL_DELETE);
+			stmt.setInt(1, no_utilisateur);
+			stmt.executeUpdate();
+			connection.close();
+			System.out.println("Delete réussi");
+			
+		} catch (Exception e) {
+			System.out.println("Erreur de delete");
+		}
+			
+		
 		
 	}
 
