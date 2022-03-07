@@ -5,7 +5,10 @@ public class DAOFactory {
 		return new UtilisateurDAOImpl();
 	}
 	
-	public static ArticleDAO getArtcileDAO() throws Exception {
+	public static ArticleDAO getArticleDAO() throws Exception {
 		return new ArticleDAOImpl();
+	}
+	public static DAORetraits getDAORetraits() throws Exception {
+		return new RetraitDAOImpl();
 	}
 }

@@ -12,6 +12,7 @@
 <p>${Articles_vendus.getnomArticle()}</p>
 <p>Description : <input type='text'>
 <p>Catégorie : <input type='text'>
+<p>Meilleure offre:
 </body>
 
 </html>

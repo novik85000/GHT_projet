@@ -14,7 +14,7 @@
 <div class="container">
 <div class="row">
     <div class="col">
-      <h5>Eni encheres h1</h5>
+      <h5>Eni encheres</h5>
     </div>
     <div class="col">
        <h5><a href="<%=request.getContextPath()%>/connecter">S'inscrire - Se connecter</a></h5>

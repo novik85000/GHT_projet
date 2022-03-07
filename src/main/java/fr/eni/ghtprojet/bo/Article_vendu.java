@@ -23,13 +23,13 @@ private String image;
  * @param dateFinEncheres
  * @param miseAPrix
  * @param prixVente
- * @param etatVente
- * @param no_categorie
  * @param no_Utilisateur
+ * @param no_categorie
+ * @param etatVente
  * @param image
  */
 public Article_vendu(int no_Article, String nom_Article, String description, String dateDebutEncheres,
-		String dateFinEncheres, int miseAPrix, int prixVente, String etatVente, int no_categorie,int no_Utilisateur, String image) {
+		String dateFinEncheres, int miseAPrix, int prixVente, int no_Utilisateur, int no_categorie,String etatVente, String image) {
 	super();
 	this.no_Article = no_Article;
 	this.nom_Article = nom_Article;

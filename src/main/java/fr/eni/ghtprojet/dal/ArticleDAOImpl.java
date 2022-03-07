@@ -22,12 +22,12 @@ import fr.eni.ghtprojet.utils.Connexion;
  *
  */
 public class ArticleDAOImpl implements ArticleDAO {
-	final private String SQL_INSERT_ARTCILE = "insert INTO ARTICLES_VENDUS (nom_article,description,"
+	final private String SQL_INSERT_ARTICLE = "insert INTO ARTICLES_VENDUS (nom_article,description,"
 			+ "date_debut_enchere,date_fin_enchere,prix_initial,prix_vente,no_categorie, "
 			+ "no_utilisateur,etat_vente,image) \r\n "
 			+ "VALUES (?,?,?,?,?,?,?,?,?,?) ";
 	final private String SQL_INSERT_RETRAIT = "insert INTO RETRAITS (no_article, rue, code_postal, ville) VALUES (?, ?, ?, ?) ";
-	
+	final private String SELECT_ARTICLES_VENDUS = "SELECT * FROM ARTICLES_VENDUS where no_article = ? ";
 	@Override
 	public void insert(Article_vendu article, Retrait retrait) throws SQLException {
 		Connection connection = null;
@@ -35,7 +35,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 		System.out.println("connection a reussi");
 			try {
 				connection = Connexion.getConnection();
-				stmt = connection.prepareStatement(SQL_INSERT_ARTCILE, stmt.RETURN_GENERATED_KEYS);
+				stmt = connection.prepareStatement(SQL_INSERT_ARTICLE, stmt.RETURN_GENERATED_KEYS);
 				stmt.setString(1, article.getNom_Article());
 				stmt.setString(2, article.getDescription());
 				stmt.setDate(3, java.sql.Date.valueOf(article.getDateDebutEncheres()));
@@ -77,9 +77,37 @@ public class ArticleDAOImpl implements ArticleDAO {
 	}
 
 	@Override
-	public Utilisateur selectById(int no_article) {
-
-		return null;
+	public Article_vendu selectById(int no_article) {
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		Article_vendu article = null;
+		System.out.println("connection a reussi");
+			try {
+				connection = Connexion.getConnection();
+				stmt = connection.prepareStatement(SELECT_ARTICLES_VENDUS);
+				stmt.setInt(1, no_article);
+				System.out.println("set de statement a reussi");
+				ResultSet rs = stmt.executeQuery();
+				if (rs.next()) {
+					article = new Article_vendu (
+							rs.getInt("no_article"),
+							rs.getString("nom_article"),
+							rs.getString("description"),
+							String.valueOf(rs.getDate("date_debut_enchere")),
+							String.valueOf(rs.getDate("date_fin_enchere")),
+							rs.getInt("prix_initial"),
+							rs.getInt("prix_vente"),
+							rs.getInt("no_utilisateur"),
+							rs.getInt("no_categorie"),
+							rs.getString("etat_vente"),
+							rs.getString("image")
+							);
+				}
+			}
+			catch (Exception e) {
+				System.out.println("select by id n'a pas réussi");
+			}
+		return article;
 	}
 
 	@Override

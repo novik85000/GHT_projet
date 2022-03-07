@@ -28,4 +28,8 @@ public class ArticleManager {
 		dao.insert(article, retrait);
 	
 	}
+	
+	public Article_vendu selectById(int no_article) {
+		return dao.selectById(no_article);
+	}
 }
