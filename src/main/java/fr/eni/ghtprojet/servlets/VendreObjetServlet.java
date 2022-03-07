@@ -52,18 +52,31 @@ public class VendreObjetServlet extends HttpServlet {
 		
 		user = (Utilisateur)request.getSession().getAttribute("user");
 		
-		String nom_article = request.getParameter("Article");
-		String description = request.getParameter("Description");
-		int categorie = Integer.parseInt(request.getParameter("categories"));
+		String nom_article = request.getParameter("Article").trim();
+		String description = request.getParameter("Description").trim();
+		int categorie = Integer.parseInt(request.getParameter("categories").trim());
 		
 		String date1 = request.getParameter("dateDebut");
 		String date2 = request.getParameter("dateFin");
 		
-		int prixDepart = Integer.parseInt(request.getParameter("prixDepart"));
+		int prixDepart = Integer.parseInt(request.getParameter("prixDepart").trim());
 		
-		String rue = request.getParameter("rue");
-		String code_postal = request.getParameter("code_postal");
-		String ville = request.getParameter("ville");
+		String rue = request.getParameter("rue").trim();
+		if (rue.equals("") || rue == null) {
+			rue = user.getRue();
+		}
+		String code_postal = request.getParameter("code_postal").trim();
+		
+		if (code_postal.equals("") || code_postal == null) {
+			code_postal = user.getCode_Postal();
+		}
+		
+		String ville = request.getParameter("ville").trim();
+		
+		if (ville.equals("") || ville == null) {
+			ville = user.getVille();
+		}
+		
 		
 		Retrait retrait = new Retrait(rue, code_postal, ville);
 		
