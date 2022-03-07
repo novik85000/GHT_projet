@@ -47,10 +47,10 @@ public class Encherir extends HttpServlet {
 		Article_vendu article = null;
 		Utilisateur user = null;
 		try {
-			ArticleManager mger = new ArticleManager();
-			UtilisateurManager mgerUser = new UtilisateurManager();
-			article = mger.selectById(4);
-			user = mgerUser.selectById(2);
+			//ArticleManager mger = new ArticleManager();
+			//UtilisateurManager mgerUser = new UtilisateurManager();
+			//article = mger.selectById(4);
+			//user = mgerUser.selectById(2);
 			System.out.println(article);
 			System.out.println(user);
 		} catch (Exception e) {
