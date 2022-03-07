@@ -10,6 +10,7 @@ import fr.eni.ghtprojet.bo.Utilisateur;
 import fr.eni.ghtprojet.servlets.Connecter;
 import fr.eni.ghtprojet.utils.Connexion;
 
+
 public class UtilisateurDAOImpl implements UtilisateurDAO {
 	private final static String SQL_SE_CONNECTER = "select * from UTILISATEURS where pseudo=? or email=? and mot_de_passe=?";
 	
@@ -18,6 +19,9 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	 		+ "set pseudo = ?, prenom=?, telephone=?,code_postal=?,mot_de_passe=?,nom=?, email=?, rue=?, ville=?\r\n"
 	 		+ "where no_utilisateur = ?";
 	private final static String SQL_DELETE  =  "delete from utilisateurs where no_utilisateur = ?";
+	
+	private static final String SQL_SELECT_BY_ID = "select no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe,credit "
+			+ " from Utilisateur where no_article = ?";
 	public static boolean isUnique = true;
 
 	
@@ -74,10 +78,45 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public Utilisateur selectById(int no_utilisateur) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public Utilisateur selectById(int no_utilisateur) throws Exception {
+		
+		// mise en place de la connection 
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		System.out.println("connection a reussi");
+		ResultSet rs = null;
+		Utilisateur user = null;
+
+					try {
+						
+						connection = Connexion.getConnection();
+						stmt = connection.prepareStatement(SQL_SELECT_BY_ID );
+							stmt.setInt(1, no_utilisateur);
+
+							rs = stmt.executeQuery();
+							if (rs.next()) {
+								
+						user = new Utilisateur(rs.getInt("no_utilisateur"), 
+								rs.getString("pseudo"), 
+								rs.getString("nom"),
+								rs.getString("prenom"),
+								rs.getString("email"),
+								rs.getString("telephone"),
+								rs.getString("rue"),
+								rs.getString("code_postal"),
+								rs.getString("ville"),
+								rs.getString("mot_de_passe"),
+								rs.getInt("credit"),
+								rs.getByte("administrateur"));
+						
+							}
+					} catch (SQLException e) {
+						throw new DALException("selectById failed - NuméroUtilisateur = " + no_utilisateur, e);
+					}
+					return user;
+			
+			}
+
 
 	@Override
 	public List<Utilisateur> SelectAll() {
