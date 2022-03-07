@@ -73,7 +73,7 @@ public class Connecter extends HttpServlet {
 		System.out.println("user existe");
 		isFound = true;
 		request.setAttribute("messageError", messageError);
-		response.sendRedirect(request.getContextPath()+"/accueillirConnecte");
+		response.sendRedirect(request.getContextPath()+"/accueillirconnecte");
 		}
 		else {
 			System.out.println("user existe pas");
