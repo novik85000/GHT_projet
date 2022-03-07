@@ -15,7 +15,20 @@ private String etatVente;
 private int no_Categorie; 
 private int no_Utilisateur;
 private String image; 
-
+/**
+ * Création d'un constructeur prenant tous les champs en compte 
+ * @param no_Article
+ * @param nom_Article
+ * @param description
+ * @param dateDebutEncheres
+ * @param dateFinEncheres
+ * @param miseAPrix
+ * @param prixVente
+ * @param etatVente
+ * @param no_categorie
+ * @param no_Utilisateur
+ * @param image
+ */
 public Article_vendu(int no_Article, String nom_Article, String description, Date dateDebutEncheres,
 		Date dateFinEncheres, int miseAPrix, int prixVente, String etatVente, int no_categorie,int no_Utilisateur, String image) {
 	super();
@@ -32,7 +45,19 @@ public Article_vendu(int no_Article, String nom_Article, String description, Dat
 	this.image = image;
 }
 
-
+/**
+ * Constructeur ne prenant pas en compte le numéro de l'article car s'implémente de lui même dans la base
+ * @param nom_Article
+ * @param description
+ * @param dateDebutEncheres
+ * @param dateFinEncheres
+ * @param miseAPrix
+ * @param prixVente
+ * @param etatVente
+ * @param no_categorie
+ * @param no_Utilisateur
+ * @param image
+ */
 public Article_vendu(String nom_Article, String description, Date dateDebutEncheres,
 		Date dateFinEncheres, int miseAPrix, int prixVente, String etatVente, int no_categorie,int no_Utilisateur, String image) {
 	super();
@@ -48,6 +73,8 @@ public Article_vendu(String nom_Article, String description, Date dateDebutEnche
 	this.no_Utilisateur = no_Utilisateur;
 	this.image = image;
 }
+
+// Déclaration des méthodes Setters and Getters 
 public int getNo_Article() {
 	return no_Article;
 }
@@ -117,6 +144,8 @@ public String getImage() {
 public void setImage(String image) {
 	this.image = image;
 }
+
+// Déclaration de la méthode to String
 @Override
 public String toString() {
 	return "Article_vendu [no_Article=" + no_Article + ", nom_Article=" + nom_Article + ", description=" + description

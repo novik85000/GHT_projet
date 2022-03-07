@@ -49,8 +49,12 @@ public class VendreObjetServlet extends HttpServlet {
 		
 		Date date1 = new Date(2021, 12, 20);
 		Date date2 = new Date(2021, 12, 24);
+		// rentrer des données en dur pour test 
+		//article = new Article_vendu("pc","rouge" ,date1 ,date2 ,1500,1800,"EC",1,2,"pc");
 		
-		article = new Article_vendu("pc","rouge" ,date1 ,date2 ,1500,1800,"EC",1,2,"pc");
+		/*TODO
+		 * Finir la partie insertion en prenant en compte les données rentré par utilisateur 
+		 */
 		try {
 			ArticleManager mgr = new ArticleManager();
 			mgr.insert(article);
