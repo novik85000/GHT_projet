@@ -17,6 +17,7 @@ import java.util.Date;
 
 import fr.eni.ghtprojet.bll.ArticleManager;
 import fr.eni.ghtprojet.bo.Article_vendu;
+import fr.eni.ghtprojet.bo.Retrait;
 import fr.eni.ghtprojet.bo.Utilisateur;
 
 /**
@@ -60,6 +61,14 @@ public class VendreObjetServlet extends HttpServlet {
 		
 		int prixDepart = Integer.parseInt(request.getParameter("prixDepart"));
 		
+		String rue = request.getParameter("rue");
+		String code_postal = request.getParameter("code_postal");
+		String ville = request.getParameter("ville");
+		
+		Retrait retrait = new Retrait(rue, code_postal, ville);
+		
+		request.getSession().setAttribute("retrait", retrait);
+		
 		
 		// rentrer des données en dur pour test 
 		article = new Article_vendu(nom_article,description ,date1 ,date2 ,prixDepart,prixDepart,"EC",
@@ -70,8 +79,9 @@ public class VendreObjetServlet extends HttpServlet {
 		 */
 		try {
 			ArticleManager mgr = new ArticleManager();
-			mgr.insert(article);
+			mgr.insert(article, retrait);
 			System.out.println(article);
+			System.out.println(retrait);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

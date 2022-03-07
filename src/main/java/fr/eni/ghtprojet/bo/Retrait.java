@@ -5,10 +5,10 @@ private String rue;
 private String code_Postal;
 private String ville;
 
-public Retrait(String rue, String code_Postal) {
-	super();
+public Retrait(String rue, String code_Postal, String ville) {
 	this.rue = rue;
 	this.code_Postal = code_Postal;
+	this.ville = ville;
 }
 
 public String getRue() {

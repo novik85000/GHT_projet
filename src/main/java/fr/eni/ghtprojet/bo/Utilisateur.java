@@ -19,7 +19,7 @@ public class Utilisateur {
 	private String ville;
 	private String mot_de_passe;
 	private  int credit; 
-	private byte administrateur;
+	private byte administrateur; 
 	
 	
 	public Utilisateur(int no_Utilisateur, String pseudo, String nom, String prenom, String email, String telephone,
