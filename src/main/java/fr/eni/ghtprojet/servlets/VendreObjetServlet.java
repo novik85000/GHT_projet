@@ -1,8 +1,8 @@
 package fr.eni.ghtprojet.servlets;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
@@ -11,12 +11,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import fr.eni.ghtprojet.bll.ArticleManager;
 import fr.eni.ghtprojet.bo.Article_vendu;
+import fr.eni.ghtprojet.bo.Utilisateur;
 
 /**
  * Servlet implementation class VendreObjetServlet
@@ -45,12 +46,24 @@ public class VendreObjetServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Article_vendu article = null; 
+		Article_vendu article = null;
+		Utilisateur user = null;
 		
-		Date date1 = new Date(2021, 12, 20);
-		Date date2 = new Date(2021, 12, 24);
+		user = (Utilisateur)request.getSession().getAttribute("user");
+		
+		String nom_article = request.getParameter("Article");
+		String description = request.getParameter("Description");
+		int categorie = Integer.parseInt(request.getParameter("categories"));
+		
+		String date1 = request.getParameter("dateDebut");
+		String date2 = request.getParameter("dateFin");
+		
+		int prixDepart = Integer.parseInt(request.getParameter("prixDepart"));
+		
+		
 		// rentrer des données en dur pour test 
-		//article = new Article_vendu("pc","rouge" ,date1 ,date2 ,1500,1800,"EC",1,2,"pc");
+		article = new Article_vendu(nom_article,description ,date1 ,date2 ,prixDepart,prixDepart,"EC",
+				categorie,user.getNo_Utilisateur(),"0");
 		
 		/*TODO
 		 * Finir la partie insertion en prenant en compte les données rentré par utilisateur 

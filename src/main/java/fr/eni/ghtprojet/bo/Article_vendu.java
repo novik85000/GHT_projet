@@ -1,14 +1,13 @@
 package fr.eni.ghtprojet.bo;
-
-import java.sql.Date;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Article_vendu {
 private int no_Article;
 private String nom_Article;
 private String description;
-private Date dateDebutEncheres;
-private Date dateFinEncheres;
+private String dateDebutEncheres;
+private String dateFinEncheres;
 private int miseAPrix;
 private int prixVente;
 private String etatVente;
@@ -29,8 +28,8 @@ private String image;
  * @param no_Utilisateur
  * @param image
  */
-public Article_vendu(int no_Article, String nom_Article, String description, Date dateDebutEncheres,
-		Date dateFinEncheres, int miseAPrix, int prixVente, String etatVente, int no_categorie,int no_Utilisateur, String image) {
+public Article_vendu(int no_Article, String nom_Article, String description, String dateDebutEncheres,
+		String dateFinEncheres, int miseAPrix, int prixVente, String etatVente, int no_categorie,int no_Utilisateur, String image) {
 	super();
 	this.no_Article = no_Article;
 	this.nom_Article = nom_Article;
@@ -58,8 +57,8 @@ public Article_vendu(int no_Article, String nom_Article, String description, Dat
  * @param no_Utilisateur
  * @param image
  */
-public Article_vendu(String nom_Article, String description, Date dateDebutEncheres,
-		Date dateFinEncheres, int miseAPrix, int prixVente, String etatVente, int no_categorie,int no_Utilisateur, String image) {
+public Article_vendu(String nom_Article, String description, String dateDebutEncheres,
+		String dateFinEncheres, int miseAPrix, int prixVente, String etatVente, int no_categorie,int no_Utilisateur, String image) {
 	super();
 	
 	this.nom_Article = nom_Article;
@@ -93,16 +92,16 @@ public String getDescription() {
 public void setDescription(String description) {
 	this.description = description;
 }
-public Date getDateDebutEncheres() {
+public String getDateDebutEncheres() {
 	return dateDebutEncheres;
 }
-public void setDateDebutEncheres(Date dateDebutEncheres) {
+public void setDateDebutEncheres(String dateDebutEncheres) {
 	this.dateDebutEncheres = dateDebutEncheres;
 }
-public Date getDateFinEncheres() {
+public String getDateFinEncheres() {
 	return dateFinEncheres;
 }
-public void setDateFinEncheres(Date dateFinEncheres) {
+public void setDateFinEncheres(String dateFinEncheres) {
 	this.dateFinEncheres = dateFinEncheres;
 }
 public int getMiseAPrix() {

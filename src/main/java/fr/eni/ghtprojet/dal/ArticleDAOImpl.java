@@ -4,6 +4,7 @@
 package fr.eni.ghtprojet.dal;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -31,8 +32,8 @@ public class ArticleDAOImpl implements ArticleDAO {
 				stmt = connection.prepareStatement(SQL_INSERT_ARTCILE);
 				stmt.setString(1, article.getNom_Article());
 				stmt.setString(2, article.getDescription());
-				stmt.setDate(3, article.getDateDebutEncheres());
-				stmt.setDate(4, article.getDateFinEncheres());
+				stmt.setDate(3, java.sql.Date.valueOf(article.getDateDebutEncheres()));
+				stmt.setDate(4,  java.sql.Date.valueOf(article.getDateFinEncheres()));
 				stmt.setInt(5, article.getPrixVente());
 				stmt.setInt(6, article.getMiseAPrix());
 				stmt.setInt(7, article.getNo_Categorie());

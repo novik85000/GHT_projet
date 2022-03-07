@@ -22,10 +22,10 @@
 			<div class="control-form">
                 <label for="categories">Categories</label>
                 <select name="categories" id="categories">
-                    <option value="informatique">Informatique</option>
-                    <option value="ameublement">Ameublement</option>
-                    <option value="vetement">Vêtements</option>
-                    <option value="sport">Sport et Loisirs </option>
+                    <option value="1">Informatique</option>
+                    <option value="2">Ameublement</option>
+                    <option value="3">Vêtements</option>
+                    <option value="4">Sport et Loisirs </option>
                 </select>
             </div>
                 <br>
