@@ -43,5 +43,9 @@ public class UtilisateurManager {
 		dao.delete(no_utilisateur);
 	
 	}
+
+	public Utilisateur selectById(int i) throws Exception {
+		return dao.selectById(i);
+	}
 }
 

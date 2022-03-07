@@ -21,7 +21,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	private final static String SQL_DELETE  =  "delete from utilisateurs where no_utilisateur = ?";
 	
 	private static final String SQL_SELECT_BY_ID = "select no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe,credit "
-			+ " from Utilisateur where no_article = ?";
+			+ " from Utilisateurs where no_utilisateur = ?";
 	public static boolean isUnique = true;
 
 	
@@ -111,7 +111,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 						
 							}
 					} catch (SQLException e) {
-						throw new DALException("selectById failed - NuméroUtilisateur = " + no_utilisateur, e);
+						throw new DALException("selectById failed - NumeroUtilisateur = " + no_utilisateur, e);
 					}
 					return user;
 			
@@ -180,7 +180,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 			stmt.setInt(1, no_utilisateur);
 			stmt.executeUpdate();
 			connection.close();
-			System.out.println("Delete réussi");
+			System.out.println("Delete r�ussi");
 			
 		} catch (Exception e) {
 			System.out.println("Erreur de delete");

@@ -14,7 +14,7 @@ public class ArticleManager {
 	private ArticleDAO dao;
 	
 	public ArticleManager () throws Exception {
-	 dao = DAOFactory.getArtcileDAO();
+	 dao = DAOFactory.getArticleDAO();
 	}
 	
 	public static ArticleManager getInstance() throws Exception {

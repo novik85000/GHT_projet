@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.ghtprojet.bll.ArticleManager;
+import fr.eni.ghtprojet.bll.UtilisateurManager;
+import fr.eni.ghtprojet.bo.Article_vendu;
+import fr.eni.ghtprojet.bo.Utilisateur;
 
 /**
  * Servlet implementation class Encherir
@@ -41,9 +44,15 @@ public class Encherir extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		Article_vendu article = null;
+		Utilisateur user = null;
 		try {
 			ArticleManager mger = new ArticleManager();
-			mger.selectById(4);
+			UtilisateurManager mgerUser = new UtilisateurManager();
+			article = mger.selectById(4);
+			user = mgerUser.selectById(2);
+			System.out.println(article);
+			System.out.println(user);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

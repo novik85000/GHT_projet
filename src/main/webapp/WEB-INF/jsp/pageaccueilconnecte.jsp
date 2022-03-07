@@ -121,7 +121,9 @@
 		    	Fin de l'enchere <br>
 		    	Vendeur: <br>
 		    </p>
-		    <a href="#" class="btn btn-primary">Afficher plus</a>
+		      <form action="<%= request.getContextPath() %>/encherir" method="post">
+		   		 <button class="btn btn-primary" type="submit">Afficher plus</button>
+		   	 </form>
 		  </div>
 	</div>
   </div>
