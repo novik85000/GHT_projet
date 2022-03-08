@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.ghtprojet.bll.ArticleManager;
+import fr.eni.ghtprojet.bll.RetraitManager;
 import fr.eni.ghtprojet.bll.UtilisateurManager;
 import fr.eni.ghtprojet.bo.Article_vendu;
+import fr.eni.ghtprojet.bo.Retrait;
 import fr.eni.ghtprojet.bo.Utilisateur;
 
 /**
@@ -45,13 +47,18 @@ public class Encherir extends HttpServlet {
 		// TODO Auto-generated method stub
 		Article_vendu article = null;
 		Utilisateur user = null;
+		Retrait rt = null;
 		try {
 			ArticleManager mger = new ArticleManager();
 			UtilisateurManager mgerUser = new UtilisateurManager();
+			RetraitManager mgerRetr = new RetraitManager();
 			article = mger.selectById(4);
-			user = mgerUser.selectById(2);
+			user = mgerUser.selectById(4);
+			rt = mgerRetr.selectById(11);
+			
 			System.out.println(article);
 			System.out.println(user);
+			System.out.println(rt);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

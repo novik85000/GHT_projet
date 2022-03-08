@@ -19,6 +19,10 @@ public Retrait(int no_article, String rue, String code_Postal, String ville) {
 	this.ville = ville;
 }
 
+public Retrait() {
+	// TODO Auto-generated constructor stub
+}
+
 public String getRue() {
 	return rue;
 }

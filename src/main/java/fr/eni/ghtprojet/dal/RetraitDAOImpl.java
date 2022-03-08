@@ -12,8 +12,8 @@ import fr.eni.ghtprojet.utils.Connexion;
 
 public class RetraitDAOImpl implements DAORetraits {
 	
-	private static final String SQL_SELECT_BY_ID = "select no_article, rue, code_postal "
-			+ " from Retrait where no_ = ?";
+	private static final String SQL_SELECT_BY_ID = "select no_article, rue, code_postal, ville "
+			+ " from Retraits where no_article = ?";
 
 	@Override
 	public void insert(Retrait retrait) throws SQLException {
