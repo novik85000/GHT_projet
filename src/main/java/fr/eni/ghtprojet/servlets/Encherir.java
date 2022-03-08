@@ -1,6 +1,7 @@
 package fr.eni.ghtprojet.servlets;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,9 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.ghtprojet.bll.ArticleManager;
+import fr.eni.ghtprojet.bll.EnchereManager;
 import fr.eni.ghtprojet.bll.RetraitManager;
 import fr.eni.ghtprojet.bll.UtilisateurManager;
 import fr.eni.ghtprojet.bo.Article_vendu;
+import fr.eni.ghtprojet.bo.Encheres;
 import fr.eni.ghtprojet.bo.Retrait;
 import fr.eni.ghtprojet.bo.Utilisateur;
 
@@ -50,15 +53,21 @@ public class Encherir extends HttpServlet {
 		Utilisateur user = null;
 		Retrait rt = null;
 		List<Article_vendu> listArticles = null;
+		Encheres enchere = null; 
 		try {
 			ArticleManager mger = new ArticleManager();
 			UtilisateurManager mgerUser = new UtilisateurManager();
 			RetraitManager mgerRetr = new RetraitManager();
+			
 			article = mger.selectById(4);
 			user = mgerUser.selectById(4);
 			rt = mgerRetr.selectById(11);
 			listArticles = mger.selectAll();
-		
+			 // Test pour insert enchere 
+			EnchereManager mgerench = new EnchereManager();
+			enchere = new Encheres(1, 4, "2021-12-24", 700);
+			mgerench.insert(enchere); 
+			System.out.println(enchere);
 			
 			System.out.println(article);
 			System.out.println(user);
