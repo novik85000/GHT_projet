@@ -20,6 +20,10 @@
 	         <label for="mdp">Mot de passe:</label> 
 	        <input type='password' name='mdp' required="required">
 	        </div>
+	                <label class="checkbox">
+                <input type="checkbox" name="remember"> Se souvenir de moi
+                <span class="pull-right"> <a href="#"> Mot de passe oublié?</a></span>
+            </label><br>
 	        <button type="submit">Connexion</button>
    	 	</form> 
    	 

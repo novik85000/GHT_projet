@@ -1,6 +1,8 @@
 package fr.eni.ghtprojet.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -57,8 +59,67 @@ public class Accueillir extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		int categorie = Integer.valueOf(request.getParameter("categorie"));
+		System.out.println(categorie);
+		List<Article_vendu> newListArticles = new ArrayList<>();
+		
+		List<Article_vendu> listArticles = (List<Article_vendu>) request.getSession().getAttribute("listeArticles");
+		for (int i = 0; i < listArticles.size(); i++) {
+			if (listArticles.get(i).getNo_Categorie()==categorie) {
+				newListArticles.add(listArticles.get(i));
+			}
+				
+		}
+		if (categorie ==0) {
+			request.getSession().setAttribute("articleApresFiltre", listArticles);
+		}else {
+			request.getSession().setAttribute("articleApresFiltre", newListArticles);
+		}
+		String recherche = null;
+		recherche = request.getParameter("recherche").trim().toLowerCase();
+		System.out.println(recherche);
+		List<Article_vendu> articlesApresRecherche = new ArrayList<>();
+		
+		if ((recherche != null)&& (recherche!= "")){
+			for (int i = 0; i < listArticles.size(); i++) {
+				int index = listArticles.get(i).getNom_Article().trim().toLowerCase().indexOf(recherche);
+				if (index == -1) {
+					System.out.println("article ne pas trouvé");	
+				} else {
+					System.out.println("article est trouvé");
+					articlesApresRecherche.add(listArticles.get(i));
+				}
+			}
+			
+			if (articlesApresRecherche != null) {
+				System.out.println(articlesApresRecherche);
+			}
+			
+			System.out.println("article apres rechereche : " + articlesApresRecherche);
+			
+			List<Article_vendu> listApresFiltre = (List<Article_vendu>) request.getSession().getAttribute("articleApresFiltre") ;
+			List<Article_vendu> listeApresFiltreEtRecherche = new ArrayList<>();
+			
+			if (listApresFiltre!=null) {
+				for (int i = 0; i < listApresFiltre.size(); i++) {
+					if (articlesApresRecherche.contains(listApresFiltre.get(i))) {
+						listeApresFiltreEtRecherche.add(listApresFiltre.get(i));
+					}
+				}
+			}
+			
+			if (listeApresFiltreEtRecherche!=null) {
+				request.getSession().setAttribute("articleApresFiltre", listeApresFiltreEtRecherche);
+			}
+			
+			
+		}
+		
+		System.out.println(listArticles);
+		System.out.println(newListArticles);
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/pageaccueil.jsp");
 		rd.forward(request, response);
 	}
-
 }

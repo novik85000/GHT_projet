@@ -37,7 +37,7 @@
   <form class="container-fluid">
     <div class="input-group">
       <span class="input-group-text" id="basic-addon1">&#128270</span>
-      <input type="text" class="form-control" placeholder="Le nom de l'article contient" aria-label="Username" aria-describedby="basic-addon1">
+      <input type="text" class="form-control" placeholder="Le nom de l'article contient" aria-label="Username" aria-describedby="basic-addon1" name="recherche">
     </div>
   </form>
 </nav>
@@ -58,7 +58,13 @@
   </div>
   <div class="row">
   <%! public List <Article_vendu> listArticles = null;  %>
-  <%  listArticles = (List <Article_vendu>)request.getSession().getAttribute("listeArticles"); %>
+  <%  if ((List <Article_vendu>)request.getSession().getAttribute("articleApresFiltre") == null){
+	   		listArticles = (List <Article_vendu>)request.getSession().getAttribute("listeArticles");
+	   		} else {
+	   			listArticles = (List <Article_vendu>)request.getSession().getAttribute("articleApresFiltre");
+	   		}
+	   		
+	   		%>
   <% for (int i = 0; i<listArticles.size(); i++) { %>
     <div class="col col-6">
      <div class="card" style="width: 18rem;">
