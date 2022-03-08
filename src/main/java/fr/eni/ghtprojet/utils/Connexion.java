@@ -1,6 +1,7 @@
 package fr.eni.ghtprojet.utils;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -23,7 +24,7 @@ private static DataSource dataSource;
 
 	}
 	
-	public static Connection getConnection() throws Exception {		
+	public static Connection getConnection() throws SQLException {		
 		
 		return dataSource.getConnection();
 	}

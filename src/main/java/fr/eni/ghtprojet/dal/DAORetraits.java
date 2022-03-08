@@ -9,7 +9,7 @@ import fr.eni.ghtprojet.bo.Utilisateur;
 
 public interface DAORetraits {
 	public void insert(Retrait retrait) throws SQLException; 
-	public Retrait selectById(int no_article); 
+	public Retrait selectById(int no_article)throws DALException; 
 	public List<Retrait> SelectAll(); 
 	public void update(Retrait retrait); 
 	public void delete(int no_article); 

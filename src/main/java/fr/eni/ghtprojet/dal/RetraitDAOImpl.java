@@ -22,7 +22,7 @@ public class RetraitDAOImpl implements DAORetraits {
 	}
 
 	@Override
-	public Retrait selectById(int no_article) {
+	public Retrait selectById(int no_article) throws DALException {
 		// mise en place de la connection 
 		Connection connection = null;
 		PreparedStatement stmt = null;
