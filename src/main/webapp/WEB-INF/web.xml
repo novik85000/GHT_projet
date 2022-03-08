@@ -5,7 +5,8 @@
   		  <welcome-file>accueil_servlet</welcome-file>
  	 </welcome-file-list>
  
-	
-	
+	<session-config>
+	<session-timeout>5</session-timeout>
+	</session-config>
 	
 </web-app>
