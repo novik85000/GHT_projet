@@ -11,4 +11,8 @@ public class DAOFactory {
 	public static DAORetraits getDAORetraits() throws Exception {
 		return new RetraitDAOImpl();
 	}
+	
+	public static EnchereDAO getEnchereDAO() throws Exception {
+		return new EnchereDAOImpl();
+	}
 }
