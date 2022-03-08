@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.spi.DirStateFactory.Result;
@@ -28,6 +29,8 @@ public class ArticleDAOImpl implements ArticleDAO {
 			+ "VALUES (?,?,?,?,?,?,?,?,?,?) ";
 	final private String SQL_INSERT_RETRAIT = "insert INTO RETRAITS (no_article, rue, code_postal, ville) VALUES (?, ?, ?, ?) ";
 	final private String SELECT_ARTICLES_VENDUS = "SELECT * FROM ARTICLES_VENDUS where no_article = ? ";
+	final private String SQL_SELECT_ALL = "select * from ARTICLES_VENDUS ";
+	
 	@Override
 	public void insert(Article_vendu article, Retrait retrait) throws SQLException {
 		Connection connection = null;
@@ -105,15 +108,45 @@ public class ArticleDAOImpl implements ArticleDAO {
 				}
 			}
 			catch (Exception e) {
-				System.out.println("select by id n'a pas réussi");
+				System.out.println("select by id n'a pas rï¿½ussi");
 			}
 		return article;
 	}
 
 	@Override
 	public List<Article_vendu> SelectAll() {
+		List<Article_vendu> listArticle = new ArrayList<>();
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		Article_vendu article = null;
+		System.out.println("connection a reussi");
+			try {
+				connection = Connexion.getConnection();
+				stmt = connection.prepareStatement(SQL_SELECT_ALL);
+				System.out.println("statement");
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+					listArticle.add(new Article_vendu (
+							rs.getInt("no_article"),
+							rs.getString("nom_article"),
+							rs.getString("description"),
+							String.valueOf(rs.getDate("date_debut_enchere")),
+							String.valueOf(rs.getDate("date_fin_enchere")),
+							rs.getInt("prix_initial"),
+							rs.getInt("prix_vente"),
+							rs.getInt("no_utilisateur"),
+							rs.getInt("no_categorie"),
+							rs.getString("etat_vente"),
+							rs.getString("image")));
+					
+				}
+			} catch (Exception e) {
+				System.out.println("Select All n'ai pas reussi");
+			}
 		
-		return null;
+		
+		
+		return listArticle;
 	}
 
 	@Override

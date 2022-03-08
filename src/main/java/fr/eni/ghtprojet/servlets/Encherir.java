@@ -1,6 +1,7 @@
 package fr.eni.ghtprojet.servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -48,6 +49,7 @@ public class Encherir extends HttpServlet {
 		Article_vendu article = null;
 		Utilisateur user = null;
 		Retrait rt = null;
+		List<Article_vendu> listArticles = null;
 		try {
 			ArticleManager mger = new ArticleManager();
 			UtilisateurManager mgerUser = new UtilisateurManager();
@@ -55,14 +57,18 @@ public class Encherir extends HttpServlet {
 			article = mger.selectById(4);
 			user = mgerUser.selectById(4);
 			rt = mgerRetr.selectById(11);
+			listArticles = mger.selectAll();
+		
 			
 			System.out.println(article);
 			System.out.println(user);
 			System.out.println(rt);
+			System.out.println(listArticles);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+		request.getRequestDispatcher("/WEB-INF/jsp/detailvente.jsp").forward(request, response);
 	}
 
 }

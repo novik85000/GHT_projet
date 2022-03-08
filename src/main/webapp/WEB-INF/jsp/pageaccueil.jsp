@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="fr.eni.ghtprojet.bo.Article_vendu"%>
+<%@page import="fr.eni.ghtprojet.bo.Utilisateur"%>
+<%@page import="fr.eni.ghtprojet.bll.UtilisateurManager"%>
+<%@page  import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +16,7 @@
 </head>
 <body>
 <div class="container">
+<form action="<%= request.getContextPath() %>/accueil_servlet" method="post">
 <div class="row">
     <div class="col">
       <h5>Eni encheres</h5>
@@ -37,34 +42,49 @@
   </form>
 </nav>
 <div class="dropdown">
-  <span class="h5">Categorie: </span> <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Toutes
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
-  </ul>
+  <span class="h5">Categorie: </span> 
+  <select class="h5" name = "categorie">
+    <option class="dropdown-item" value = "0" >Toutes</option>
+    <option class="dropdown-item" value = "1" >Informatique</option>
+    <option class="dropdown-item" value = "2" >Ameublement</option>
+    <option class="dropdown-item" value = "3" >Vêtements</option>
+    <option class="dropdown-item" value = "4" >Sport et Loisirs</option>
+  </select>
 </div>
     </div>
     <div class="col">
-      <button type="button" class="btn btn-primary btn-lg">Rechercher</button>
+      <button type="submit" class="btn btn-primary btn-lg">Rechercher</button>
     </div>
   </div>
   <div class="row">
-    <div class="col">
+  <%! public List <Article_vendu> listArticles = null;  %>
+  <%  listArticles = (List <Article_vendu>)request.getSession().getAttribute("listeArticles"); %>
+  <% for (int i = 0; i<listArticles.size(); i++) { %>
+    <div class="col col-6">
      <div class="card" style="width: 18rem;">
 		  <img src="<%=request.getContextPath()%>/images/meilleur-pc-gamer.jpg" class="card-img-top" alt="image">
 		  <div class="card-body">
-		    <h5 class="card-title">Card title</h5>
-		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		    <a href="#" class="btn btn-primary">Go somewhere</a>
+		    <h5 class="card-title"> <%= listArticles.get(i).getNom_Article() %></h5>
+		    <p class="card-text">  
+		    	Prix: <%= listArticles.get(i).getPrixVente() %> <br>
+		    	Fin de l'enchère: <%= listArticles.get(i).getDateFinEncheres()%> <br>
+		    	<% UtilisateurManager mger = new UtilisateurManager ();
+		    	Utilisateur user = mger.selectById(listArticles.get(i).getNo_Utilisateur());
+		    	
+		    	
+		    	%>
+		    	Vendeur: <%= user.getPseudo() %> <br>
+		    
+		    </p>
+		    <h6> S'inscrire pour voir les details </h6>
 		  </div>
-	</div>
-  </div>
-
+	 </div>
+     </div>
+    <% } %>
+   
 </div>
-	
+</form>
+</div>
 	
 </body>
 </html>

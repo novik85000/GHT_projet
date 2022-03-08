@@ -111,6 +111,7 @@
   	</div>
   </div>
   <div class="row">
+  	<%   %>
     <div class="col">
      <div class="card" style="width: 18rem;">
 		  <img src="<%=request.getContextPath()%>/images/meilleur-pc-gamer.jpg" class="card-img-top" alt="image">
