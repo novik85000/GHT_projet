@@ -33,9 +33,9 @@ public class Encherir extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/detailvente.jsp");
-		//rd.forward(request, response);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/detailvente.jsp");
+		rd.forward(request, response);
 	}
 
 	/**
@@ -43,14 +43,13 @@ public class Encherir extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
 		Article_vendu article = null;
 		Utilisateur user = null;
 		try {
-			//ArticleManager mger = new ArticleManager();
-			//UtilisateurManager mgerUser = new UtilisateurManager();
-			//article = mger.selectById(4);
-			//user = mgerUser.selectById(2);
+			ArticleManager mger = new ArticleManager();
+			UtilisateurManager mgerUser = new UtilisateurManager();
+			article = mger.selectById(4);
+			user = mgerUser.selectById(2);
 			System.out.println(article);
 			System.out.println(user);
 		} catch (Exception e) {
