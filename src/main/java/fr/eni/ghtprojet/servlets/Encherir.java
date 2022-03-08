@@ -64,15 +64,21 @@ public class Encherir extends HttpServlet {
 			rt = mgerRetr.selectById(11);
 			listArticles = mger.selectAll();
 			 // Test pour insert enchere 
-			EnchereManager mgerench = new EnchereManager();
-			enchere = new Encheres(1, 4, "2021-12-24", 700);
-			mgerench.insert(enchere); 
-			System.out.println(enchere);
+			//EnchereManager mgerench = new EnchereManager();
+			//enchere = new Encheres(2, 5, "2021-12-24", 700);
+			//mgerench.insert(enchere); 
+			//System.out.println(enchere);
 			
 			System.out.println(article);
 			System.out.println(user);
 			System.out.println(rt);
 			System.out.println(listArticles);
+			System.out.println("No_Article" + request.getParameter("idArticle"));
+			
+			article = mger.selectById(Integer.valueOf(request.getParameter("idArticle")));
+			
+			
+			request.getSession().setAttribute("article", article );
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
