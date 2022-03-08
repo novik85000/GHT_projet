@@ -65,7 +65,8 @@
 	   		}
 	   		
 	   		%>
-  <% for (int i = 0; i<listArticles.size(); i++) { %>
+  <% if (listArticles != null) { 
+	  for (int i = 0; i<listArticles.size(); i++) { %>
     <div class="col col-6">
      <div class="card" style="width: 18rem;">
 		  <img src="<%=request.getContextPath()%>/images/meilleur-pc-gamer.jpg" class="card-img-top" alt="image">
@@ -86,7 +87,7 @@
 		  </div>
 	 </div>
      </div>
-    <% } %>
+    <% }} %>
    
 </div>
 </form>

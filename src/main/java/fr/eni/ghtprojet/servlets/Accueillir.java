@@ -44,7 +44,22 @@ public class Accueillir extends HttpServlet {
 			ArticleManager mgerArticle = new ArticleManager();
 			listArticles = mgerArticle.selectAll();
 			System.out.println(listArticles);
-			request.getSession().setAttribute("listeArticles", listArticles);
+			
+			List<Article_vendu> articlesEC = new ArrayList<>();
+			
+			for (int i = 0; i < listArticles.size(); i++) {
+				if (listArticles.get(i).getEtatVente().trim().toLowerCase().equals("ec") == false) {
+					System.out.println(listArticles.get(i) + " - article n'est pas en cours");
+					
+				}
+				else {
+					System.out.println("article en cours");
+					articlesEC.add(listArticles.get(i));
+				}
+			}
+			
+			
+			request.getSession().setAttribute("listeArticles", articlesEC);
 			
 			
 		} catch (Exception e) {
@@ -65,6 +80,12 @@ public class Accueillir extends HttpServlet {
 		List<Article_vendu> newListArticles = new ArrayList<>();
 		
 		List<Article_vendu> listArticles = (List<Article_vendu>) request.getSession().getAttribute("listeArticles");
+		
+		
+		
+		
+		
+		
 		for (int i = 0; i < listArticles.size(); i++) {
 			if (listArticles.get(i).getNo_Categorie()==categorie) {
 				newListArticles.add(listArticles.get(i));
@@ -85,9 +106,9 @@ public class Accueillir extends HttpServlet {
 			for (int i = 0; i < listArticles.size(); i++) {
 				int index = listArticles.get(i).getNom_Article().trim().toLowerCase().indexOf(recherche);
 				if (index == -1) {
-					System.out.println("article ne pas trouvé");	
+					System.out.println("article ne pas trouvï¿½");	
 				} else {
-					System.out.println("article est trouvé");
+					System.out.println("article est trouvï¿½");
 					articlesApresRecherche.add(listArticles.get(i));
 				}
 			}
