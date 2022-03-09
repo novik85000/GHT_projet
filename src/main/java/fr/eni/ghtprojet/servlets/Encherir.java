@@ -89,12 +89,14 @@ public class Encherir extends HttpServlet {
 				if (enchereById == null || enchereById.getNo_utilisateur() != userCourant.getNo_Utilisateur()) {
 					System.out.println("User n'a pas encore enchere ");
 					mgerEnch.insert(enchere);
+					System.out.println("insertion a reussi  :" + enchereById);
 				} else {
 					System.out.println("User deja enchere ");
+					mgerEnch.update(enchere);
 					
 				}
 				
-				System.out.println("enchere by id :" + enchereById);
+				
 				
 				
 				

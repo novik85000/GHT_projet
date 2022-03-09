@@ -94,7 +94,7 @@ public class EnchereDAOImpl implements EnchereDAO {
 	}
 
 	@Override
-	public void update(Encheres enchere) {
+	public void update(Encheres enchere) throws DALException {
 		Connection connection = null;
 		PreparedStatement stmt = null;
 		System.out.println("connection a reussi");
@@ -112,7 +112,8 @@ public class EnchereDAOImpl implements EnchereDAO {
 			}
 			
 			catch (Exception e) {
-				System.out.println("update - enchere- n'a pas r�ussi");
+				throw new DALException("update failed - enchere = " + enchere, e);
+				
 			}
 			
 
