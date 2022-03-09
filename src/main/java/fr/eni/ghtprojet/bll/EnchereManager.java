@@ -33,4 +33,9 @@ public class EnchereManager {
 		public Encheres selectById(int id) throws Exception {
 			return dao.selectById(id);
 		}
+		
+		public void update(Encheres enchere) throws DALException {
+			dao.update(enchere);
+		
+		}
 }

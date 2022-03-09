@@ -6,7 +6,11 @@
  	 </welcome-file-list>
  
 	<session-config>
+<<<<<<< HEAD
 	<session-timeout>3000</session-timeout>
+=======
+	<session-timeout>300</session-timeout>
+>>>>>>> branch 'main' of https://github.com/novik85000/GHT_projet2.git
 	</session-config>
 	
 </web-app>

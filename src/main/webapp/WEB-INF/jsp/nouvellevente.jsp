@@ -32,12 +32,10 @@
                 </select>
             </div>
                 <br>
-          <form method="post" enctype="multipart/form-data">
+         
 			 <div>
    				<label for="file">Uploader</label>
-   				<input type="file" id="file" name="file" multiple>
-			</div>
-			</form>
+   				<input type="file" id="file" name="file" multiple accept=".png, .jpg, .jpeg">
             </div>
             	<br>
             <div class="control-form">

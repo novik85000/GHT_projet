@@ -97,27 +97,22 @@ public class EnchereDAOImpl implements EnchereDAO {
 	public void update(Encheres enchere) {
 		Connection connection = null;
 		PreparedStatement stmt = null;
-		Encheres encheres = null;
 		System.out.println("connection a reussi");
 			try {
 				connection = Connexion.getConnection();
 				stmt = connection.prepareStatement(SQL_UPDATE);
-				stmt.setInt(1, no_article);
+				stmt.setInt(1, enchere.getNo_utilisateur());
+				stmt.setInt(2, enchere.getNo_article());
+				stmt.setDate(3, java.sql.Date.valueOf(enchere.getDateEnchere()));
+				stmt.setInt(4, enchere.getMontantEnchere());
 				System.out.println("set de statement a reussi");
-				ResultSet rs = stmt.executeQuery();
-				if (rs.next()) {
-					enchere = new Encheres (
-							rs.getInt("no_utilisateur"),
-							rs.getInt("no_article"),
-							String.valueOf(rs.getDate("date_enchere")),
-							rs.getInt("montant_enchere")							
-							);
-				}
+				stmt.executeUpdate();
+				
 			connection.close();
 			}
 			
 			catch (Exception e) {
-				System.out.println("select by id - enchere- n'a pas r�ussi");
+				System.out.println("update - enchere- n'a pas r�ussi");
 			}
 			
 
