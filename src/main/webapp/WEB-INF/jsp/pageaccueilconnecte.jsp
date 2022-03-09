@@ -95,7 +95,7 @@
      </div>
 		    
 
-<form action="<%= request.getContextPath() %>/encherir" method="post">
+<form action="<%= request.getContextPath() %>/visualiserdetail" method="get">
 		    <button type="submit" name="idArticle" value="<%= no_article %>"> Voir les details </button> 
 </form>
 		  </div>

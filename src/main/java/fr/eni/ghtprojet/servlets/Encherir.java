@@ -53,48 +53,14 @@ public class Encherir extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		Article_vendu article = null;
-		Utilisateur user = null;
-		Retrait rt = null;
-		List<Article_vendu> listArticles = null;
+
 		Encheres enchere = null; 
-		Categorie categorie = null;
+		
 		int prixVente = 0;
 		try {
-			ArticleManager mger = new ArticleManager();
-			UtilisateurManager mgerUser = new UtilisateurManager();
-			RetraitManager mgerRetr = new RetraitManager();
+			
 			EnchereManager mgerEnch = new EnchereManager();
 			
-			
-			article = mger.selectById(4);
-			user = mgerUser.selectById(4);
-			rt = mgerRetr.selectById(11);
-			listArticles = mger.selectAll();
-			
-			
-			 // Test pour insert enchere 
-			//EnchereManager mgerench = new EnchereManager();
-			//enchere = new Encheres(2, 5, "2021-12-24", 700);
-			//mgerench.insert(enchere); 
-			//System.out.println(enchere);
-			
-			//System.out.println(article);
-			//System.out.println(user);
-			//System.out.println(rt);
-			//System.out.println(listArticles);
-			
-			if (request.getParameter("idArticle") != null) {
-				System.out.println("No_Article" + request.getParameter("idArticle"));
-				//System.out.println("Libelle categorie A" + categorie);
-				article = mger.selectById(Integer.parseInt(request.getParameter("idArticle")));
-				categorie = mger.selectById1(article.getNo_Categorie());
-				request.getSession().setAttribute("libelle", categorie );
-				request.getSession().setAttribute("article", article );
-				user = mgerUser.selectById(article.getNo_Utilisateur());
-				request.getSession().setAttribute("userVendeur", user);
-			}
 			
 			if (request.getParameter("prixVente") != null) {
 				prixVente = Integer.parseInt(request.getParameter("prixVente"));
@@ -109,7 +75,7 @@ public class Encherir extends HttpServlet {
 				System.out.println(currentDateTime);
 				System.out.println(formattedDateTime);
 				
-				enchere = new Encheres(paramNoUtil, article.getNo_Article(), formattedDateTime, prixVente);
+				enchere = new Encheres(paramNoUtil, (int)(request.getSession().getAttribute("idArticle")), formattedDateTime, prixVente);
 				
 				mgerEnch.insert(enchere);
 				
@@ -117,15 +83,13 @@ public class Encherir extends HttpServlet {
 				
 				
 			}
-			
-			
 		
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		request.getRequestDispatcher("/WEB-INF/jsp/detailvente.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/encherir");
+		//request.getRequestDispatcher("/WEB-INF/jsp/detailvente.jsp").forward(request, response);
 	}
 
 }

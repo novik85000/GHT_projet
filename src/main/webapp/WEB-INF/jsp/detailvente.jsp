@@ -23,16 +23,18 @@
 	Utilisateur user = null;
 	user= (Utilisateur)request.getSession().getAttribute("userVendeur");
 	int placeholder = 0;
-	if (article.getMiseAPrix()>article.getPrixVente()) {
+	if (article!= null) {
+		if (article.getMiseAPrix()>article.getPrixVente()) {
 		placeholder = article.getMiseAPrix();
-	}else {
+		}else {
 		placeholder = article.getPrixVente();
+		}
 	}
 %>
 	<h1>ENI-ENCHERES</h1>
-	<form action="<%= request.getContextPath() %>/encherir" method="post">
+	<form action="<%= request.getContextPath() %>/visualiserdetail" method="post">
 		<h3>Détail vente</h3>
-		<p> <%= article.getNom_Article()%>
+		<p> <%=article.getNom_Article()%>
 		<p>Description : <%= article.getDescription()%></p>
 		<p> Categorie : <%= categorie.getLibelle() %> </p>
 		<p>Meilleure offre : <%= article.getPrixVente() %> </p>
@@ -41,7 +43,7 @@
 		<p> Retrait : <%= user.getRue() %> <br><%=user.getCode_Postal() %>  <%= user.getVille() %></p>
 		<p> Vendeur : <%= user.getPseudo() %></p>
 		
-		<span> Ma proposition </span> <input type='number' name='prixVente' value="<%=(placeholder+10)%>" required="required">  <br>
+		<span> Ma proposition </span> <input type='text' name='prixVente' value="<%=(placeholder+10)%>" required="required">  <br>
 		<button class="btn btn-primary" type="submit">Enchérir</button>
 	</form>
 

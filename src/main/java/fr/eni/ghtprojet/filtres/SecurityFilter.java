@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
  * Servlet Filter implementation class SecurityFilter
  */
 @WebFilter(dispatcherTypes = {DispatcherType.REQUEST }
-					, urlPatterns = { "/accueillirconnecte", "/afficherprofil","/encherir","/modifierprofil","/supprimerprofil","/vendreobjet" })
+					, urlPatterns = { "/accueillirconnecte", "/afficherprofil","/encherir","/modifierprofil","/supprimerprofil","/vendreobjet","/visualiserdetail" })
 	
 public class SecurityFilter extends HttpFilter implements Filter {
        
