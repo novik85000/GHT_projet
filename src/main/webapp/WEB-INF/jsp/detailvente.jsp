@@ -32,7 +32,7 @@
 	}
 %>
 	<h1>ENI-ENCHERES</h1>
-	<form action="<%= request.getContextPath() %>/visualiserdetail" method="post">
+	<form action="<%= request.getContextPath() %>/encherir" method="post">
 		<h3>Détail vente</h3>
 		<p> <%=article.getNom_Article()%>
 		<p>Description : <%= article.getDescription()%></p>
@@ -43,7 +43,7 @@
 		<p> Retrait : <%= user.getRue() %> <br><%=user.getCode_Postal() %>  <%= user.getVille() %></p>
 		<p> Vendeur : <%= user.getPseudo() %></p>
 		
-		<span> Ma proposition </span> <input type='text' name='prixVente' value="<%=(placeholder+10)%>" required="required">  <br>
+		<span> Ma proposition </span> <input type='number' name='prixVente' value="<%=(placeholder+10)%>" required="required">  <br>
 		<button class="btn btn-primary" type="submit">Enchérir</button>
 	</form>
 
