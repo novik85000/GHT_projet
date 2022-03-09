@@ -32,9 +32,12 @@
                 </select>
             </div>
                 <br>
-            <div class="control-form">
-           		<label for="charger">Photos articles</label>
-           		<button type="button">Charger</button><br>
+          <form method="post" enctype="multipart/form-data">
+			 <div>
+   				<label for="file">Uploader</label>
+   				<input type="file" id="file" name="file" multiple>
+			</div>
+			</form>
             </div>
             	<br>
             <div class="control-form">
