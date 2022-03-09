@@ -1,7 +1,11 @@
 package fr.eni.ghtprojet.servlets;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -16,6 +20,7 @@ import fr.eni.ghtprojet.bll.EnchereManager;
 import fr.eni.ghtprojet.bll.RetraitManager;
 import fr.eni.ghtprojet.bll.UtilisateurManager;
 import fr.eni.ghtprojet.bo.Article_vendu;
+import fr.eni.ghtprojet.bo.Categorie;
 import fr.eni.ghtprojet.bo.Encheres;
 import fr.eni.ghtprojet.bo.Retrait;
 import fr.eni.ghtprojet.bo.Utilisateur;
@@ -54,31 +59,68 @@ public class Encherir extends HttpServlet {
 		Retrait rt = null;
 		List<Article_vendu> listArticles = null;
 		Encheres enchere = null; 
+		Categorie categorie = null;
+		int prixVente = 0;
 		try {
 			ArticleManager mger = new ArticleManager();
 			UtilisateurManager mgerUser = new UtilisateurManager();
 			RetraitManager mgerRetr = new RetraitManager();
+			EnchereManager mgerEnch = new EnchereManager();
+			
 			
 			article = mger.selectById(4);
 			user = mgerUser.selectById(4);
 			rt = mgerRetr.selectById(11);
 			listArticles = mger.selectAll();
+			
+			
 			 // Test pour insert enchere 
 			//EnchereManager mgerench = new EnchereManager();
 			//enchere = new Encheres(2, 5, "2021-12-24", 700);
 			//mgerench.insert(enchere); 
 			//System.out.println(enchere);
 			
-			System.out.println(article);
-			System.out.println(user);
-			System.out.println(rt);
-			System.out.println(listArticles);
-			System.out.println("No_Article" + request.getParameter("idArticle"));
+			//System.out.println(article);
+			//System.out.println(user);
+			//System.out.println(rt);
+			//System.out.println(listArticles);
 			
-			article = mger.selectById(Integer.valueOf(request.getParameter("idArticle")));
+			if (request.getParameter("idArticle") != null) {
+				System.out.println("No_Article" + request.getParameter("idArticle"));
+				//System.out.println("Libelle categorie A" + categorie);
+				article = mger.selectById(Integer.parseInt(request.getParameter("idArticle")));
+				categorie = mger.selectById1(article.getNo_Categorie());
+				request.getSession().setAttribute("libelle", categorie );
+				request.getSession().setAttribute("article", article );
+				user = mgerUser.selectById(article.getNo_Utilisateur());
+				request.getSession().setAttribute("userVendeur", user);
+			}
+			
+			if (request.getParameter("prixVente") != null) {
+				prixVente = Integer.parseInt(request.getParameter("prixVente"));
+				System.out.println("Prix vente" + prixVente);
+				
+				Utilisateur userCourant =  (Utilisateur) request.getSession().getAttribute("user");
+				int paramNoUtil = userCourant.getNo_Utilisateur();
+				
+				LocalDateTime currentDateTime = LocalDateTime.now();
+				DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
+				String formattedDateTime = currentDateTime.format(formatter);
+				System.out.println(currentDateTime);
+				System.out.println(formattedDateTime);
+				
+				enchere = new Encheres(paramNoUtil, article.getNo_Article(), formattedDateTime, prixVente);
+				
+				mgerEnch.insert(enchere);
+				
+				System.out.println("enchere "+ enchere + " reussi");
+				
+				
+			}
 			
 			
-			request.getSession().setAttribute("article", article );
+		
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -7,7 +7,9 @@
 <title>Modifier profil</title>
 </head>
 <body>
-<h1>ENI-ENCHERES</h1>
+    <a href = "<%= request.getContextPath() %>/accueillirconnecte">
+      <div> <img style = "color: red;" src="<%=request.getContextPath()%>/images/eni-logo.jpg" alt="image" width = "100px" ></div>
+    </a>
 	    <form action="<%= request.getContextPath() %>/modifierprofil" method="post">
 	        <div class="form-control">
 	         <label for="pseudo">Pseudo:</label> 

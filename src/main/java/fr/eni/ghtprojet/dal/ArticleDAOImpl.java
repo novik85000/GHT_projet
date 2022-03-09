@@ -14,6 +14,7 @@ import java.util.List;
 import javax.naming.spi.DirStateFactory.Result;
 
 import fr.eni.ghtprojet.bo.Article_vendu;
+import fr.eni.ghtprojet.bo.Categorie;
 import fr.eni.ghtprojet.bo.Retrait;
 import fr.eni.ghtprojet.bo.Utilisateur;
 import fr.eni.ghtprojet.utils.Connexion;
@@ -30,6 +31,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 	final private String SQL_INSERT_RETRAIT = "insert INTO RETRAITS (no_article, rue, code_postal, ville) VALUES (?, ?, ?, ?) ";
 	final private String SELECT_ARTICLES_VENDUS = "SELECT * FROM ARTICLES_VENDUS where no_article = ? ";
 	final private String SQL_SELECT_ALL = "select * from ARTICLES_VENDUS ";
+	final private String SQL_SELECT_BY_ID_CATEGORIES = "select * FROM CATEGORIES where no_categorie = ?";
 	
 	@Override
 	public void insert(Article_vendu article, Retrait retrait) throws SQLException {
@@ -106,11 +108,41 @@ public class ArticleDAOImpl implements ArticleDAO {
 							rs.getString("image")
 							);
 				}
+			connection.close();
 			}
+			
 			catch (Exception e) {
 				System.out.println("select by id n'a pas r�ussi");
 			}
+			
 		return article;
+	}
+	
+	public Categorie selectById1(int no_categorie) {
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		Categorie categorie = null;
+		
+		try {
+			connection = Connexion.getConnection();
+			stmt = connection.prepareStatement(SQL_SELECT_BY_ID_CATEGORIES);
+			stmt.setInt(1, no_categorie);
+			System.out.println("set de statement a reussi");
+			ResultSet rs = stmt.executeQuery();
+			
+			if (rs.next()) {
+				categorie = new Categorie(
+						rs.getInt("no_categorie"),
+						rs.getString("libelle"));
+			}
+			connection.close();
+			
+		} catch (SQLException e) {
+			System.out.println("SelectbyID categorie n'a pas réussi");
+		}
+		
+		return categorie;
+		
 	}
 
 	@Override
@@ -140,6 +172,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 							rs.getString("image")));
 					
 				}
+				
 			} catch (Exception e) {
 				System.out.println("Select All n'ai pas reussi");
 			}

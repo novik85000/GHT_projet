@@ -7,6 +7,9 @@
 <title>Nouvelle Vente</title>
 </head>
 <body>
+    <a href = "<%= request.getContextPath() %>/accueillirconnecte">
+      <div> <img style = "color: red;" src="<%=request.getContextPath()%>/images/eni-logo.jpg" alt="image" width = "100px" ></div>
+    </a>
 <h1>Nouvelle Vente </h1>
 <form action="<%= request.getContextPath() %>/vendreobjet" method="post">
 	        <div class="form-control">

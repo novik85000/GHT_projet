@@ -10,6 +10,9 @@
 <title>Mon Profil</title>
 </head>
 <body>
+    <a href = "<%= request.getContextPath() %>/accueillirconnecte">
+      <div> <img style = "color: red;" src="<%=request.getContextPath()%>/images/eni-logo.jpg" alt="image" width = "100px" ></div>
+    </a>
 	<p>Pseudo: ${user.getPseudo()}</p>
 	<p>Nom: ${user.getNom()}</p>
 	<p>Prénom: ${user.getPrenom()}</p>
