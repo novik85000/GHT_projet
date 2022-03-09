@@ -66,6 +66,11 @@ public class Encherir extends HttpServlet {
 				prixVente = Integer.parseInt(request.getParameter("prixVente"));
 				System.out.println("Prix vente" + prixVente);
 				
+				String idArticleString = (String)(request.getSession().getAttribute("idArticle"));
+				
+				int idArticle = Integer.parseInt(idArticleString);
+				
+				
 				Utilisateur userCourant =  (Utilisateur) request.getSession().getAttribute("user");
 				int paramNoUtil = userCourant.getNo_Utilisateur();
 				
@@ -75,7 +80,7 @@ public class Encherir extends HttpServlet {
 				System.out.println(currentDateTime);
 				System.out.println(formattedDateTime);
 				
-				enchere = new Encheres(paramNoUtil, (int)(request.getSession().getAttribute("idArticle")), formattedDateTime, prixVente);
+				enchere = new Encheres(paramNoUtil, idArticle , formattedDateTime, prixVente);
 				
 				mgerEnch.insert(enchere);
 				

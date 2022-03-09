@@ -31,19 +31,6 @@ public class VisualiserDetail extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("No_Article" + request.getParameter("idArticle"));
-		//System.out.println("Libelle categorie A" + categorie);
-		request.getSession().setAttribute("idArticle", request.getParameter("idArticle"));
-		int idarticle = (int)(request.getSession().getAttribute("idArticle"));
-		ArticleManager mger = null;
-		try {
-			mger = new ArticleManager();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Article_vendu article = null;
-		article = mger.selectById(idarticle);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/detailvente.jsp");
 		rd.forward(request, response);
 	}
@@ -59,11 +46,31 @@ public class VisualiserDetail extends HttpServlet {
 		Encheres enchere = null; 
 		Categorie categorie = null;
 		int prixVente = 0;
+		
+		System.out.println("No_Article" + request.getParameter("idArticle"));
+		//System.out.println("Libelle categorie A" + categorie);
+		request.getSession().setAttribute("idArticle", request.getParameter("idArticle"));
+		String idArticleString = (String) request.getSession().getAttribute("idArticle");
+		int idArticle = Integer.parseInt(idArticleString);
+		ArticleManager mger = null;
 		try {
-			ArticleManager mger = new ArticleManager();
+			mger = new ArticleManager();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		article = mger.selectById(idArticle);
+		
+		
+		
+		
+		try {
 			UtilisateurManager mgerUser = new UtilisateurManager();
 			RetraitManager mgerRetr = new RetraitManager();
 			EnchereManager mgerEnch = new EnchereManager();
+			
+			
+			
 			
 			
 			//test
@@ -93,6 +100,9 @@ public class VisualiserDetail extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		
+		
 		}
 	}
 
