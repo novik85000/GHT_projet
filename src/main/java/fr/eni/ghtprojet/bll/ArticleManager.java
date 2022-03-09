@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import fr.eni.ghtprojet.bo.Article_vendu;
+import fr.eni.ghtprojet.bo.Categorie;
 import fr.eni.ghtprojet.bo.Retrait;
 import fr.eni.ghtprojet.bo.Utilisateur;
 import fr.eni.ghtprojet.dal.ArticleDAO;
@@ -36,5 +37,9 @@ public class ArticleManager {
 	
 	public List<Article_vendu> selectAll() {
 		return dao.SelectAll();
+	}
+	
+	public Categorie selectById1 (int no_categorie) {
+		return dao.selectById1(no_categorie);
 	}
 }
