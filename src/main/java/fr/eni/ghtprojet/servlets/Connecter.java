@@ -39,8 +39,7 @@ public class Connecter extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/pagelogin.jsp");
 		rd.forward(request, response);
-		
-		
+
 	}
 
 	/**

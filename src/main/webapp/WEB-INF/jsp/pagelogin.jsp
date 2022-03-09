@@ -8,6 +8,8 @@
 </head>
 <body>
 <%!private String erreur = ""; %>
+<%session.setMaxInactiveInterval(20); %>
+<%session.getMaxInactiveInterval(); %>
 
  <% if (request.getAttribute("messageError")!=null){
 	 	erreur = (String) request.getAttribute("messageError");
