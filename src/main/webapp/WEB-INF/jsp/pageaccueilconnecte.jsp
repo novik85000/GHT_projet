@@ -95,8 +95,8 @@
      </div>
 		    
 
-<form action="<%= request.getContextPath() %>/visualiserdetail" method="get">
-		    <button type="submit" name="idArticle" value="<%= no_article %>"> Voir les details </button> 
+<form action="<%= request.getContextPath() %>/visualiserdetail" method="post">
+		    <a href=<%= request.getContextPath() %>/visualiserdetail><button type="submit" name="idArticle" value="<%= no_article %>"> Voir les details </button> </a>
 </form>
 		  </div>
 	
