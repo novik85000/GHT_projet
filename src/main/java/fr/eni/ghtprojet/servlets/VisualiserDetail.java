@@ -66,8 +66,8 @@ public class VisualiserDetail extends HttpServlet {
 			EnchereManager mgerEnch = new EnchereManager();
 			
 			
-			
-			 // Test pour insert enchere 
+			//test
+			// Test pour insert enchere 
 			//EnchereManager mgerench = new EnchereManager();
 			//enchere = new Encheres(2, 5, "2021-12-24", 700);
 			//mgerench.insert(enchere); 

@@ -1,4 +1,4 @@
-package fr.eni.ghtprojet.servlets;
+npackage fr.eni.ghtprojet.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
