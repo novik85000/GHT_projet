@@ -29,4 +29,8 @@ public class EnchereManager {
 			dao.insert(enchere);
 		
 		}
+		
+		public Encheres selectById(int id) throws Exception {
+			return dao.selectById(id);
+		}
 }

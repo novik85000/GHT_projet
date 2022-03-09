@@ -82,9 +82,20 @@ public class Encherir extends HttpServlet {
 				
 				enchere = new Encheres(paramNoUtil, idArticle , formattedDateTime, prixVente);
 				
-				mgerEnch.insert(enchere);
 				
-				System.out.println("enchere "+ enchere + " reussi");
+				Encheres enchereById = mgerEnch.selectById(idArticle);
+			
+				
+				if (enchereById == null || enchereById.getNo_utilisateur() != userCourant.getNo_Utilisateur()) {
+					System.out.println("User n'a pas encore enchere ");
+					mgerEnch.insert(enchere);
+				} else {
+					System.out.println("User deja enchere ");
+				}
+				
+				System.out.println("enchere by id :" + enchereById);
+				
+				
 				
 				
 			}
@@ -93,7 +104,7 @@ public class Encherir extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		response.sendRedirect(request.getContextPath() + "/encherir");
+		response.sendRedirect(request.getContextPath() + "/visualiserdetail");
 		//request.getRequestDispatcher("/WEB-INF/jsp/detailvente.jsp").forward(request, response);
 	}
 

@@ -19,7 +19,11 @@ import fr.eni.ghtprojet.utils.Connexion;
 public class EnchereDAOImpl implements EnchereDAO {
 	final private String SQL_INSERT_ENCHERES = "insert INTO ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere) \r\n"
 			+ " VALUES (?, ?, ?, ?)";
-
+	final private String SQL_SELECT_BY_ID = "SELECT * FROM ENCHERES WHERE no_article = ? ";
+	
+	final private String SQL_UPDATE = "UPDATE ENCHERES SET no_utilisateur = ?, date enchere = ?, montant_enchere = ? WHERE no_article = ? ";
+	
+	
 	@Override
 	public void insert(Encheres enchere) throws DALException {
 		// préparation de la connection
@@ -55,8 +59,32 @@ public class EnchereDAOImpl implements EnchereDAO {
 
 	@Override
 	public Encheres selectById(int no_article) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		Encheres enchere = null;
+		System.out.println("connection a reussi");
+			try {
+				connection = Connexion.getConnection();
+				stmt = connection.prepareStatement(SQL_SELECT_BY_ID);
+				stmt.setInt(1, no_article);
+				System.out.println("set de statement a reussi");
+				ResultSet rs = stmt.executeQuery();
+				if (rs.next()) {
+					enchere = new Encheres (
+							rs.getInt("no_utilisateur"),
+							rs.getInt("no_article"),
+							String.valueOf(rs.getDate("date_enchere")),
+							rs.getInt("montant_enchere")							
+							);
+				}
+			connection.close();
+			}
+			
+			catch (Exception e) {
+				System.out.println("select by id - enchere- n'a pas r�ussi");
+			}
+			
+		return enchere;
 	}
 
 	@Override
@@ -67,7 +95,31 @@ public class EnchereDAOImpl implements EnchereDAO {
 
 	@Override
 	public void update(Encheres enchere) {
-		// TODO Auto-generated method stub
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		Encheres encheres = null;
+		System.out.println("connection a reussi");
+			try {
+				connection = Connexion.getConnection();
+				stmt = connection.prepareStatement(SQL_UPDATE);
+				stmt.setInt(1, no_article);
+				System.out.println("set de statement a reussi");
+				ResultSet rs = stmt.executeQuery();
+				if (rs.next()) {
+					enchere = new Encheres (
+							rs.getInt("no_utilisateur"),
+							rs.getInt("no_article"),
+							String.valueOf(rs.getDate("date_enchere")),
+							rs.getInt("montant_enchere")							
+							);
+				}
+			connection.close();
+			}
+			
+			catch (Exception e) {
+				System.out.println("select by id - enchere- n'a pas r�ussi");
+			}
+			
 
 	}
 
