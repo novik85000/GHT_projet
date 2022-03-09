@@ -93,6 +93,9 @@ List<Article_vendu> listArticles = null;
 		}else {
 			request.getSession().setAttribute("articleApresFiltre", newListArticles);
 		}
+		
+		System.out.println("article apres filtre: " + request.getSession().getAttribute("articleApresFiltre"));
+		
 		String recherche = null;
 		recherche = request.getParameter("recherche").trim().toLowerCase();
 		System.out.println(recherche);

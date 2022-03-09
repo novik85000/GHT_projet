@@ -20,7 +20,9 @@
 <form action="<%= request.getContextPath() %>/accueillirconnecte" method="post">
 <div class="row">
     <div class="col">
-      <h5>Eni encheres</h5>
+         <a href = "<%= request.getContextPath() %>/accueil_servlet">
+      <div> <img style = "color: red;" src="<%=request.getContextPath()%>/images/eni-logo.jpg" alt="image" width = "100px" ></div>
+    </a>
     </div>
 	<div class="col">
 		<a href="<%=request.getContextPath()%>/accueillirconnecte">Enchères</a>

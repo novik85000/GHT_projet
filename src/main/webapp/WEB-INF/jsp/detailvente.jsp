@@ -10,12 +10,24 @@
 <title>Détail Vente</title>
 </head>
 <body>
+<header>
+    <a href = "<%= request.getContextPath() %>/accueillirconnecte">
+      <div> <img style = "color: red;" src="<%=request.getContextPath()%>/images/eni-logo.jpg" alt="image" width = "100px" ></div>
+    </a>
+
+</header>
 <%Article_vendu article = null;
 	article = (Article_vendu)request.getSession().getAttribute("article");
 	Categorie categorie = null;
 	categorie = (Categorie)request.getSession().getAttribute("libelle");
 	Utilisateur user = null;
 	user= (Utilisateur)request.getSession().getAttribute("userVendeur");
+	int placeholder = 0;
+	if (article.getMiseAPrix()>article.getPrixVente()) {
+		placeholder = article.getMiseAPrix();
+	}else {
+		placeholder = article.getPrixVente();
+	}
 %>
 	<h1>ENI-ENCHERES</h1>
 	<form action="<%= request.getContextPath() %>/encherir" method="post">
@@ -28,7 +40,8 @@
 		<p> Fin de l'enchère : <%= article.getDateFinEncheres()%> </p>
 		<p> Retrait : <%= user.getRue() %> <br><%=user.getCode_Postal() %>  <%= user.getVille() %></p>
 		<p> Vendeur : <%= user.getPseudo() %></p>
-		<span> Ma proposition </span> <input type='text' name='prixVente' required="required">  <br>
+		
+		<span> Ma proposition </span> <input type='number' name='prixVente' value="<%=(placeholder+10)%>" required="required">  <br>
 		<button class="btn btn-primary" type="submit">Enchérir</button>
 	</form>
 

@@ -12,7 +12,9 @@
  <% if (request.getAttribute("messageError")!=null){
 	 	erreur = (String) request.getAttribute("messageError");
  }%>
-<h1>ENI-ENCHERES</h1>
+    <a href = "<%= request.getContextPath() %>/accueil_servlet">
+      <div> <img style = "color: red;" src="<%=request.getContextPath()%>/images/eni-logo.jpg" alt="image" width = "100px" ></div>
+    </a>
 	    <form action="<%= request.getContextPath() %>/connecter" method="post">
 	        <div class="form-control">
 	         <label for="identifiant">Identifiant:</label>
