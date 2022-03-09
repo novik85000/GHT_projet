@@ -91,6 +91,7 @@ public class Encherir extends HttpServlet {
 					mgerEnch.insert(enchere);
 				} else {
 					System.out.println("User deja enchere ");
+					
 				}
 				
 				System.out.println("enchere by id :" + enchereById);
