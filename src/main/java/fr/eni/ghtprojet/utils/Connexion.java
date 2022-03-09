@@ -16,7 +16,7 @@ private static DataSource dataSource;
 		Context context;
 		try {
 			context = new InitialContext();		
-			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/pool_cnx");
+			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/pool_cnx_ght");
 		} catch (NamingException e) {
 			System.out.println("Erreur de connection - context");
 			e.printStackTrace();
