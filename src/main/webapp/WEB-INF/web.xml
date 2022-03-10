@@ -4,13 +4,7 @@
     <welcome-file-list>
   		  <welcome-file>accueil_servlet</welcome-file>
  	 </welcome-file-list>
-<<<<<<< HEAD
-=======
- 	 
  	<session-config>
 	<session-timeout>5</session-timeout>
 	</session-config>
->>>>>>> branch 'main' of https://github.com/novik85000/GHT_projet2.git
-	
-
 </web-app>

@@ -81,7 +81,6 @@
 	   		%>
   <% if (listArticles != null) { 
 	  for (int i = 0; i<listArticles.size(); i++) { %>
->>>>>>> branch 'main' of https://github.com/novik85000/GHT_projet2.git
     <div class="col col-6">
      <div class="card" style="width: 18rem;">
 		  <img src="<%=request.getContextPath()%>/images/imageAuction.png" class="card-img-top" alt="image" style="width: 5vw;">
