@@ -49,4 +49,8 @@ public class ArticleManager {
 		 dao.update(enchere);
 		 
 	 }
+	 public List<Article_vendu> rechercheArticle(String rechercheParMot, int no_categorie) throws DALException {
+		return dao.rechercheArticle(rechercheParMot, no_categorie);
+		 
+	 }
 }

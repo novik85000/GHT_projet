@@ -54,7 +54,7 @@ public class VendreObjetServlet extends HttpServlet {
 		
 		String nom_article = request.getParameter("Article").trim();
 		String description = request.getParameter("Description").trim();
-		int categorie = Integer.parseInt(request.getParameter("categories").trim());
+		int categorie = Integer.parseInt((String)request.getParameter("categories").trim());
 		
 		String date1 = request.getParameter("dateDebut");
 		String date2 = request.getParameter("dateFin");
@@ -104,10 +104,11 @@ public class VendreObjetServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		
+		
 		System.out.println("user apres vendre" + (Utilisateur)request.getSession().getAttribute("user"));
 
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/pageaccueilconnecte.jsp");
-		rd.forward(request, response);
+		request.getRequestDispatcher("/accueillirconnecte").forward(request, response);
 	}
 
 }

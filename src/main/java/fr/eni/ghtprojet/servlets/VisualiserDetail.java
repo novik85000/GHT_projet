@@ -47,21 +47,17 @@ public class VisualiserDetail extends HttpServlet {
 		Categorie categorie = null;
 		int prixVente = 0;
 		
-		System.out.println("No_Article" + request.getParameter("idArticle"));
-		//System.out.println("Libelle categorie A" + categorie);
-		request.getSession().setAttribute("idArticle", request.getParameter("idArticle"));
-		String idArticleString = (String) request.getSession().getAttribute("idArticle");
-		int idArticle = Integer.parseInt(idArticleString);
+		System.out.println("No_Article : " + request.getParameter("idArticle"));
+
+		request.setAttribute("idArticle", request.getParameter("idArticle"));
+		int idArticle = Integer.parseInt((String)request.getAttribute("idArticle"));
 		ArticleManager mger = null;
 		try {
 			mger = new ArticleManager();
+			article = mger.selectById(idArticle);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		article = mger.selectById(idArticle);
-		
-		
 		
 		
 		try {
@@ -69,32 +65,11 @@ public class VisualiserDetail extends HttpServlet {
 			RetraitManager mgerRetr = new RetraitManager();
 			EnchereManager mgerEnch = new EnchereManager();
 			
-			
-			
-			
-			
-			//test
-			// Test pour insert enchere 
-			//EnchereManager mgerench = new EnchereManager();
-			//enchere = new Encheres(2, 5, "2021-12-24", 700);
-			//mgerench.insert(enchere); 
-			//System.out.println(enchere);
-			
-			//System.out.println(article);
-			//System.out.println(user);
-			//System.out.println(rt);
-			//System.out.println(listArticles);
-			
-
-				
-				
-				
-				//article = mger.selectById(Integer.parseInt(request.getSession().getAttribute("idArticle")));
-				categorie = mger.selectById1(article.getNo_Categorie());
-				request.getSession().setAttribute("libelle", categorie );
-				request.getSession().setAttribute("article", article );
+			categorie = mger.selectById1(article.getNo_Categorie());
+				request.setAttribute("libelle", categorie );
+				request.setAttribute("article", article );
 				user = mgerUser.selectById(article.getNo_Utilisateur());
-				request.getSession().setAttribute("userVendeur", user);
+				request.setAttribute("userVendeur", user);
 		request.getRequestDispatcher("/WEB-INF/jsp/detailvente.jsp").forward(request, response);
 	
 		} catch (Exception e) {

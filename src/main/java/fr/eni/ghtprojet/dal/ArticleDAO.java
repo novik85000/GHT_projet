@@ -16,4 +16,5 @@ public interface ArticleDAO {
 	public void update(Encheres enchere) throws DALException; 
 	public void delete(int no_article); 
 	public Categorie selectById1(int no_categorie) throws DALException; 
+	public List<Article_vendu> rechercheArticle(String rechercheParMot, int no_categorie) throws DALException;
 }

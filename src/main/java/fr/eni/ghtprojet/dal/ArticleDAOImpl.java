@@ -34,6 +34,9 @@ public class ArticleDAOImpl implements ArticleDAO {
 	final private String SQL_SELECT_ALL = "select * from ARTICLES_VENDUS ";
 	final private String SQL_SELECT_BY_ID_CATEGORIES = "select * FROM CATEGORIES where no_categorie = ?";
 	final private String SQL_UPDATE_ENCHERES = "UPDATE ARTICLES_VENDUS SET prix_vente=? WHERE no_article = ? ";
+	final private String SQL_RECHERCHE_ARTICLE =  "SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE ? ";
+	final private String APPEND_RECHERCE = "and no_categorie = ? ";
+	
 	
 	@Override
 	public void insert(Article_vendu article, Retrait retrait) throws DALException {
@@ -216,5 +219,44 @@ public class ArticleDAOImpl implements ArticleDAO {
 		
 
 	}
-
+	
+	public List<Article_vendu> rechercheArticle(String rechercheParMot, int no_categorie) throws DALException {
+		
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		Article_vendu article = null;
+		List<Article_vendu> listeArticle = new ArrayList<>();
+		System.out.println("connection a reussi");
+			try {
+				connection = Connexion.getConnection();
+				if (no_categorie!=0) {
+					stmt = connection.prepareStatement(SQL_RECHERCHE_ARTICLE+APPEND_RECHERCE);
+					stmt.setString(1, "%" + rechercheParMot + "%");
+					stmt.setInt(2, no_categorie);
+				}else {
+					stmt = connection.prepareStatement(SQL_RECHERCHE_ARTICLE);
+					stmt.setString(1, "%" + rechercheParMot + "%");
+				}
+				System.out.println("statement");
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+					listeArticle.add(new Article_vendu (
+							rs.getInt("no_article"),
+							rs.getString("nom_article"),
+							rs.getString("description"),
+							String.valueOf(rs.getDate("date_debut_enchere")),
+							String.valueOf(rs.getDate("date_fin_enchere")),
+							rs.getInt("prix_initial"),
+							rs.getInt("prix_vente"),
+							rs.getInt("no_utilisateur"),
+							rs.getInt("no_categorie"),
+							rs.getString("etat_vente"),
+							rs.getString("image")));
+				}
+					
+			}catch (Exception e) {
+				 throw new DALException("recherche failed - enchere = " +  e);
+			}
+			return listeArticle;
+	}
 }

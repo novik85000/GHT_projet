@@ -64,27 +64,22 @@
   </form>
   </div>
   <div class="row">
-  <%! public List <Article_vendu> listArticles = null;  %>
-  <%  if ((List <Article_vendu>)request.getSession().getAttribute("articleApresFiltre") == null){
-	   		listArticles = (List <Article_vendu>)request.getSession().getAttribute("listeArticles");
-	   		} else {
-	   			listArticles = (List <Article_vendu>)request.getSession().getAttribute("articleApresFiltre");
-	   		}
-	   		
-	   		%>
-  <% if (listArticles != null) { 
-	  for (int i = 0; i<listArticles.size(); i++) { %>
+   <%! public List <Article_vendu> listeArticles = null;
+  public List <Article_vendu> listeArticlesApresFiltre = null;%>
+  <%  listeArticles = (List <Article_vendu>)request.getAttribute("listeArticles"); %>
+  <% if (listeArticles != null) { 
+	  for (int i = 0; i<listeArticles.size(); i++) { %>
     <div class="col col-6">
      <div class="card" style="width: 18rem;">
-		  <img src="<%=request.getContextPath()%>/images/meilleur-pc-gamer.jpg" class="card-img-top" alt="image">
+		  <img src="<%=request.getContextPath()%>/images/imageAuction.png" class="card-img-top" alt="image" style="width: 5vw;">
 		  <div class="card-body">
-		    <h5 class="card-title"> <%= listArticles.get(i).getNom_Article() %></h5>
+		    <h5 class="card-title"> <%= listeArticles.get(i).getNom_Article() %></h5>
 		    <p class="card-text">  
-		    	Prix: <%= listArticles.get(i).getPrixVente() %> <br>
-		    	Fin de l'enchère: <%= listArticles.get(i).getDateFinEncheres()%> <br>
+		    	Prix: <%= listeArticles.get(i).getPrixVente() %> <br>
+		    	Fin de l'enchère: <%= listeArticles.get(i).getDateFinEncheres()%> <br>
 		    	<% UtilisateurManager mger = new UtilisateurManager ();
-		    	Utilisateur user = mger.selectById(listArticles.get(i).getNo_Utilisateur());
-		    	 int no_article = listArticles.get(i).getNo_Article();
+		    	Utilisateur user = mger.selectById(listeArticles.get(i).getNo_Utilisateur());
+		    	 int no_article = listeArticles.get(i).getNo_Article();
 		    	
 		    	%>
 		    	Vendeur: <%= user.getPseudo() %> <br>
