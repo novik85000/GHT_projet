@@ -35,6 +35,7 @@ public class AccueillirConnecte extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 List<Article_vendu> listArticles = null;
+request.getSession().setAttribute("messageEnchere", "");
 		
 		
 		try {

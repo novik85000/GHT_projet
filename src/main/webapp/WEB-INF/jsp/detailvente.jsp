@@ -6,16 +6,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" http-equiv="refresh" content="10; "<%=request.getContextPath()%>/visualiserdetail">
 <title>Détail Vente</title>
 </head>
 <body>
 <header>
+
+<%if ((String)request.getSession().getAttribute("messageEnchere") != null){
+			message = (String)request.getSession().getAttribute("messageEnchere");
+		}
+		%>
+		<span style = "color: red;"> <%=message%> </span>
+
+		<%if (message.equals("Votre enchere a passe avec succes, vous allez être redirigez sur page d'accueil")){ %>
+		<script>
+		setTimeout(function(){
+		window.location.href = "<%= request.getContextPath() %>/accueillirconnecte";
+		}, 5000);
+		</script>
+		<%}%>
+
+
     <a href = "<%= request.getContextPath() %>/accueillirconnecte">
       <div> <img style = "color: red;" src="<%=request.getContextPath()%>/images/eni-logo.jpg" alt="image" width = "100px" ></div>
     </a>
 
 </header>
+<%! public String message = " "; %>
 <%Article_vendu article = null;
 	article = (Article_vendu)request.getSession().getAttribute("article");
 	Categorie categorie = null;
@@ -44,10 +61,10 @@
 		<p> Vendeur : <%= user.getPseudo() %></p>
 		
 		<span> Ma proposition </span> <input type='number' name='prixVente' value="<%=(placeholder+10)%>" required="required">  <br>
-		<button class="btn btn-primary" type="submit">Enchérir</button>
+		<button class="btn btn-primary" type="submit" ">Enchérir</button>
+		<a href="<%=request.getContextPath()%>/accueillirconnecte" > <button class="btn btn-primary" type="button">Back</button> </a>
 	</form>
-
-
+		
 </body>
 
 </html>

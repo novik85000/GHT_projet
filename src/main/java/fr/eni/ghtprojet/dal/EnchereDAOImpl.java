@@ -21,7 +21,7 @@ public class EnchereDAOImpl implements EnchereDAO {
 			+ " VALUES (?, ?, ?, ?)";
 	final private String SQL_SELECT_BY_ID = "SELECT * FROM ENCHERES WHERE no_article = ? ";
 	
-	final private String SQL_UPDATE = "UPDATE ENCHERES SET no_utilisateur = ?, date enchere = ?, montant_enchere = ? WHERE no_article = ? ";
+	final private String SQL_UPDATE = "UPDATE ENCHERES SET no_utilisateur = ?, montant_enchere = ?, date_enchere = ? WHERE no_article = ? ";
 	
 	
 	@Override
@@ -102,9 +102,9 @@ public class EnchereDAOImpl implements EnchereDAO {
 				connection = Connexion.getConnection();
 				stmt = connection.prepareStatement(SQL_UPDATE);
 				stmt.setInt(1, enchere.getNo_utilisateur());
-				stmt.setInt(2, enchere.getNo_article());
+				stmt.setInt(2, enchere.getMontantEnchere());
 				stmt.setDate(3, java.sql.Date.valueOf(enchere.getDateEnchere()));
-				stmt.setInt(4, enchere.getMontantEnchere());
+				stmt.setInt(4, enchere.getNo_article());
 				System.out.println("set de statement a reussi");
 				stmt.executeUpdate();
 				

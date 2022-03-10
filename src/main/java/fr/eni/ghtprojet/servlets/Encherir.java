@@ -1,6 +1,7 @@
 package fr.eni.ghtprojet.servlets;
 
 import java.io.IOException;
+import java.lang.ProcessBuilder.Redirect;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -44,7 +45,6 @@ public class Encherir extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/detailvente.jsp");
 		rd.forward(request, response);
 	}
@@ -55,60 +55,77 @@ public class Encherir extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		Encheres enchere = null; 
+		String message = "";
 		
 		int prixVente = 0;
 		try {
 			
 			EnchereManager mgerEnch = new EnchereManager();
 			
+			Article_vendu article = (Article_vendu)request.getSession().getAttribute("article");
 			
 			if (request.getParameter("prixVente") != null) {
+				
+				
 				prixVente = Integer.parseInt(request.getParameter("prixVente"));
 				System.out.println("Prix vente" + prixVente);
+				request.getSession().setAttribute("messageEnchere", "");
 				
-				String idArticleString = (String)(request.getSession().getAttribute("idArticle"));
-				
-				int idArticle = Integer.parseInt(idArticleString);
-				
-				
-				Utilisateur userCourant =  (Utilisateur) request.getSession().getAttribute("user");
-				int paramNoUtil = userCourant.getNo_Utilisateur();
-				
-				LocalDateTime currentDateTime = LocalDateTime.now();
-				DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
-				String formattedDateTime = currentDateTime.format(formatter);
-				System.out.println(currentDateTime);
-				System.out.println(formattedDateTime);
-				
-				enchere = new Encheres(paramNoUtil, idArticle , formattedDateTime, prixVente);
-				
-				
-				Encheres enchereById = mgerEnch.selectById(idArticle);
-			
-				
-				if (enchereById == null || enchereById.getNo_utilisateur() != userCourant.getNo_Utilisateur()) {
-					System.out.println("User n'a pas encore enchere ");
-					mgerEnch.insert(enchere);
-					System.out.println("insertion a reussi  :" + enchereById);
-				} else {
-					System.out.println("User deja enchere ");
-					mgerEnch.update(enchere);
+				if (prixVente <= article.getMiseAPrix() || 
+						prixVente <= article.getPrixVente() ) {
+						System.out.println("La prix d'enchere n'est pas bonne");
+						message = "Votre proposition de prix est trop petite";
+					} else {
+						System.out.println("La prix est bon");
+						
+						String idArticleString = (String)(request.getSession().getAttribute("idArticle"));
+						
+						int idArticle = Integer.parseInt(idArticleString);
+						
+						
+						Utilisateur userCourant =  (Utilisateur) request.getSession().getAttribute("user");
+						int paramNoUtil = userCourant.getNo_Utilisateur();
+						
+						LocalDateTime currentDateTime = LocalDateTime.now();
+						DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
+						String formattedDateTime = currentDateTime.format(formatter);
+						System.out.println(currentDateTime);
+						System.out.println(formattedDateTime);
+						
+						enchere = new Encheres(paramNoUtil, idArticle , formattedDateTime, prixVente);
+						
+						
+						Encheres enchereById = mgerEnch.selectById(idArticle);
+						
+						System.out.println(enchereById);
 					
-				}
-				
-				
-				
-				
-				
-				
-			}
-		
-			
+						
+						if (enchereById == null) {
+							System.out.println("User n'a pas encore enchere ");
+							mgerEnch.insert(enchere);
+							message = "Votre enchere a passe avec succes";
+							System.out.println("insertion a reussi");
+						} else if (userCourant.getNo_Utilisateur()!= enchereById.getNo_utilisateur()){
+							System.out.println("User deja enchere ");
+							mgerEnch.update(enchere);
+							System.out.println("Update a reusi");
+							message = "Votre enchere a passe avec succes, vous allez être redirigez sur page d'accueil";
+						}
+							else {
+								System.out.println("Utilisateur a deja encheri sur cet article (dernière enchère)");
+								message = "Vous avez deja enchere sur cette article";
+							}
+							
+						
+					}
+						
+					}
+					
+		request.getSession().setAttribute("messageEnchere", message);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		response.sendRedirect(request.getContextPath() + "/visualiserdetail");
-		//request.getRequestDispatcher("/WEB-INF/jsp/detailvente.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/jsp/detailvente.jsp").forward(request, response);
 	}
 
 }
