@@ -25,7 +25,6 @@
     </a>
     </div>
 	<div class="col">
-		<a href="<%=request.getContextPath()%>/accueillirconnecte">Enchères</a>
 		<a href="<%=request.getContextPath()%>/vendreobjet">Vendre un article</a>
 		<a href="<%=request.getContextPath()%>/afficherprofil">Mon profil</a>
 		<a href="<%=request.getContextPath()%>/accueil_servlet">Déconnexion</a>
