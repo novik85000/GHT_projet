@@ -78,7 +78,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public Utilisateur selectById(int no_utilisateur) throws Exception {
+	public Utilisateur selectById(int no_utilisateur) throws DALException {
 		
 		// mise en place de la connection 
 		Connection connection = null;

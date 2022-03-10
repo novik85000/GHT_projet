@@ -34,7 +34,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 	final private String SQL_SELECT_BY_ID_CATEGORIES = "select * FROM CATEGORIES where no_categorie = ?";
 	
 	@Override
-	public void insert(Article_vendu article, Retrait retrait) throws SQLException {
+	public void insert(Article_vendu article, Retrait retrait) throws DALException {
 		Connection connection = null;
 		PreparedStatement stmt = null;
 		System.out.println("connection a reussi");
@@ -73,9 +73,8 @@ public class ArticleDAOImpl implements ArticleDAO {
 				
 				stmt.executeUpdate();
 				System.out.println("Insertion réussi");
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (SQLException e) {
+				throw new DALException("Insertion non réalisé - Artcile non valide non valide  = " +  e);
 			}
 		
 			
@@ -111,14 +110,14 @@ public class ArticleDAOImpl implements ArticleDAO {
 			connection.close();
 			}
 			
-			catch (Exception e) {
+			catch (SQLException e) {
 				System.out.println("select by id n'a pas r�ussi");
 			}
 			
 		return article;
 	}
 	
-	public Categorie selectById1(int no_categorie) {
+	public Categorie selectById1(int no_categorie) throws DALException {
 		Connection connection = null;
 		PreparedStatement stmt = null;
 		Categorie categorie = null;
@@ -138,7 +137,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 			connection.close();
 			
 		} catch (SQLException e) {
-			System.out.println("SelectbyID categorie n'a pas réussi");
+			throw new DALException("selectById failed - Numéro Article = " + no_categorie, e);
 		}
 		
 		return categorie;
@@ -173,7 +172,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 					
 				}
 				
-			} catch (Exception e) {
+			} catch (SQLException e) {
 				System.out.println("Select All n'ai pas reussi");
 			}
 		
