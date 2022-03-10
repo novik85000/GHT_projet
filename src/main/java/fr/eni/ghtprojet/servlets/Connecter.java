@@ -47,7 +47,6 @@ public class Connecter extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession mySession = request. getSession();
 		String pseudo = request.getParameter("identifiant").toLowerCase().trim();
 		String mot_de_passe = request.getParameter("mdp").trim();
 		String email = pseudo;
@@ -59,7 +58,7 @@ public class Connecter extends HttpServlet {
 		try {
 			UtilisateurManager mger = new UtilisateurManager();
 			user = mger.seConnecter(pseudo, email, mot_de_passe);
-			mySession.setAttribute("user", user);
+			request.getSession().setAttribute("user", user);
 			//System.out.println(user);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -74,7 +74,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 				stmt.executeUpdate();
 				System.out.println("Insertion réussi");
 			} catch (SQLException e) {
-				throw new DALException("Insertion non réalisé - Artcile non valide non valide  = " +  e);
+				throw new DALException("Insertion non réalisé - Article non valide non valide  = " +  e);
 			}
 		
 			
