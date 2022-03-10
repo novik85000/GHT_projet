@@ -66,10 +66,10 @@
   </div>
   <div class="row">
   <%! public List <Article_vendu> listArticles = null;  %>
-  <%  if ((List <Article_vendu>)request.getSession().getAttribute("articleApresFiltre") == null){
-	   		listArticles = (List <Article_vendu>)request.getSession().getAttribute("listeArticles");
+  <%  if ((List <Article_vendu>)request.getAttribute("articleApresFiltre") == null){
+	   		listArticles = (List <Article_vendu>)request.getAttribute("listeArticles");
 	   		} else {
-	   			listArticles = (List <Article_vendu>)request.getSession().getAttribute("articleApresFiltre");
+	   			listArticles = (List <Article_vendu>)request.getAttribute("articleApresFiltre");
 	   		}
 	   		
 	   		%>

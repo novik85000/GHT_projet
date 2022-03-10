@@ -13,7 +13,7 @@
 <header>
 
 <%if ((String)request.getSession().getAttribute("messageEnchere") != null){
-			message = (String)request.getSession().getAttribute("messageEnchere");
+			message = (String)request.getAttribute("messageEnchere");
 		}
 		%>
 		<span style = "color: red;"> <%=message%> </span>
@@ -34,9 +34,9 @@
 </header>
 <%! public String message = " "; %>
 <%Article_vendu article = null;
-	article = (Article_vendu)request.getSession().getAttribute("article");
+	article = (Article_vendu)request.getAttribute("article");
 	Categorie categorie = null;
-	categorie = (Categorie)request.getSession().getAttribute("libelle");
+	categorie = (Categorie)request.getAttribute("libelle");
 	Utilisateur user = null;
 	user= (Utilisateur)request.getSession().getAttribute("userVendeur");
 	int placeholder = 0;

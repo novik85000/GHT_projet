@@ -35,7 +35,7 @@ public class AccueillirConnecte extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 List<Article_vendu> listArticles = null;
-request.getSession().setAttribute("messageEnchere", "");
+request.setAttribute("messageEnchere", "");
 		
 		
 		try {
@@ -57,7 +57,7 @@ request.getSession().setAttribute("messageEnchere", "");
 			}
 			
 			
-			request.getSession().setAttribute("listeArticles", articlesEC);
+			request.setAttribute("listeArticles", articlesEC);
 			
 			
 		} catch (Exception e) {
@@ -76,7 +76,7 @@ request.getSession().setAttribute("messageEnchere", "");
 		System.out.println(categorie);
 		List<Article_vendu> newListArticles = new ArrayList<>();
 		
-		List<Article_vendu> listArticles = (List<Article_vendu>) request.getSession().getAttribute("listeArticles");
+		List<Article_vendu> listArticles = (List<Article_vendu>) request.getAttribute("listeArticles");
 		
 		
 		
@@ -90,12 +90,12 @@ request.getSession().setAttribute("messageEnchere", "");
 				
 		}
 		if (categorie ==0) {
-			request.getSession().setAttribute("articleApresFiltre", listArticles);
+			request.setAttribute("articleApresFiltre", listArticles);
 		}else {
-			request.getSession().setAttribute("articleApresFiltre", newListArticles);
+			request.setAttribute("articleApresFiltre", newListArticles);
 		}
 		
-		System.out.println("article apres filtre: " + request.getSession().getAttribute("articleApresFiltre"));
+		System.out.println("article apres filtre: " + request.getAttribute("articleApresFiltre"));
 		
 		String recherche = null;
 		recherche = request.getParameter("recherche").trim().toLowerCase();
@@ -119,7 +119,7 @@ request.getSession().setAttribute("messageEnchere", "");
 			
 			System.out.println("article apres rechereche : " + articlesApresRecherche);
 			
-			List<Article_vendu> listApresFiltre = (List<Article_vendu>) request.getSession().getAttribute("articleApresFiltre") ;
+			List<Article_vendu> listApresFiltre = (List<Article_vendu>) request.getAttribute("articleApresFiltre") ;
 			List<Article_vendu> listeApresFiltreEtRecherche = new ArrayList<>();
 			
 			if (listApresFiltre!=null) {
@@ -131,7 +131,7 @@ request.getSession().setAttribute("messageEnchere", "");
 			}
 			
 			if (listeApresFiltreEtRecherche!=null) {
-				request.getSession().setAttribute("articleApresFiltre", listeApresFiltreEtRecherche);
+				request.setAttribute("articleApresFiltre", listeApresFiltreEtRecherche);
 			}
 			
 			

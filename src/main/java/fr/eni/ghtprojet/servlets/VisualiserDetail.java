@@ -50,7 +50,7 @@ public class VisualiserDetail extends HttpServlet {
 		System.out.println("No_Article" + request.getParameter("idArticle"));
 		//System.out.println("Libelle categorie A" + categorie);
 		request.getSession().setAttribute("idArticle", request.getParameter("idArticle"));
-		String idArticleString = (String) request.getSession().getAttribute("idArticle");
+		String idArticleString = (String) request.getAttribute("idArticle");
 		int idArticle = Integer.parseInt(idArticleString);
 		ArticleManager mger = null;
 		try {

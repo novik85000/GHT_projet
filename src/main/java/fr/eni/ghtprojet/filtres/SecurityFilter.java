@@ -42,6 +42,7 @@ public class SecurityFilter extends HttpFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		// place your code here
+		
 		if (((HttpServletRequest)request).getSession().getAttribute("user")==null) {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/pagelogin.jsp");
 			rd.forward(request, response);
@@ -50,6 +51,7 @@ public class SecurityFilter extends HttpFilter implements Filter {
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
 		}
+		
 	}
 
 	/**
