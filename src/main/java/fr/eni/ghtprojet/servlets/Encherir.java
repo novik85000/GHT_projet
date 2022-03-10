@@ -61,6 +61,7 @@ public class Encherir extends HttpServlet {
 		try {
 			
 			EnchereManager mgerEnch = new EnchereManager();
+			ArticleManager mgerArt = new ArticleManager();
 			
 			Article_vendu article = (Article_vendu)request.getSession().getAttribute("article");
 			
@@ -103,11 +104,13 @@ public class Encherir extends HttpServlet {
 						if (enchereById == null) {
 							System.out.println("User n'a pas encore enchere ");
 							mgerEnch.insert(enchere);
-							message = "Votre enchere a passe avec succes";
+							mgerArt.update(enchere);
+							message = "Votre enchere a passe avec succes, vous allez être redirigez sur page d'accueil";
 							System.out.println("insertion a reussi");
 						} else if (userCourant.getNo_Utilisateur()!= enchereById.getNo_utilisateur()){
 							System.out.println("User deja enchere ");
 							mgerEnch.update(enchere);
+							mgerArt.update(enchere);
 							System.out.println("Update a reusi");
 							message = "Votre enchere a passe avec succes, vous allez être redirigez sur page d'accueil";
 						}

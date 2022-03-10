@@ -14,6 +14,7 @@ import java.util.List;
 import javax.naming.spi.DirStateFactory.Result;
 
 import fr.eni.ghtprojet.bo.Article_vendu;
+import fr.eni.ghtprojet.bo.Encheres;
 import fr.eni.ghtprojet.bo.Categorie;
 import fr.eni.ghtprojet.bo.Retrait;
 import fr.eni.ghtprojet.bo.Utilisateur;
@@ -32,6 +33,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 	final private String SELECT_ARTICLES_VENDUS = "SELECT * FROM ARTICLES_VENDUS where no_article = ? ";
 	final private String SQL_SELECT_ALL = "select * from ARTICLES_VENDUS ";
 	final private String SQL_SELECT_BY_ID_CATEGORIES = "select * FROM CATEGORIES where no_categorie = ?";
+	final private String SQL_UPDATE_ENCHERES = "UPDATE ARTICLES_VENDUS SET prix_vente=? WHERE no_article = ? ";
 	
 	@Override
 	public void insert(Article_vendu article, Retrait retrait) throws DALException {
@@ -182,8 +184,30 @@ public class ArticleDAOImpl implements ArticleDAO {
 	}
 
 	@Override
-	public void update(Article_vendu article) {
-
+	public void update(Encheres enchere) throws DALException {
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		System.out.println("connection a reussi");
+			try {
+				connection = Connexion.getConnection();
+				stmt = connection.prepareStatement(SQL_UPDATE_ENCHERES);
+				stmt.setInt(1, enchere.getMontantEnchere());
+				stmt.setInt(2,enchere.getNo_article());
+				
+			
+				System.out.println("set de statement a reussi");
+				stmt.executeUpdate();
+				
+				System.out.println("update a reussi");
+				
+			connection.close();
+			}
+			
+			catch (Exception e) {
+				throw new DALException("update failed - enchere = " + enchere, e);
+				
+			}
+			
 
 	}
 
