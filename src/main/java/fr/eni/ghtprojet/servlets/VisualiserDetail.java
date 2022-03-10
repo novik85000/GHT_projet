@@ -46,19 +46,10 @@ public class VisualiserDetail extends HttpServlet {
 		Encheres enchere = null; 
 		Categorie categorie = null;
 		int prixVente = 0;
-		
-<<<<<<< HEAD
 		System.out.println("No_Article : " + request.getParameter("idArticle"));
 
 		request.setAttribute("idArticle", request.getParameter("idArticle"));
 		int idArticle = Integer.parseInt((String)request.getAttribute("idArticle"));
-=======
-		System.out.println("No_Article" + request.getParameter("idArticle"));
-		//System.out.println("Libelle categorie A" + categorie);
-		request.getSession().setAttribute("idArticle", request.getParameter("idArticle"));
-		String idArticleString = (String) request.getAttribute("idArticle");
-		int idArticle = Integer.parseInt(idArticleString);
->>>>>>> branch 'main' of https://github.com/novik85000/GHT_projet2.git
 		ArticleManager mger = null;
 		try {
 			mger = new ArticleManager();
