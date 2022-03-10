@@ -66,7 +66,7 @@ public class Encherir extends HttpServlet {
 			Utilisateur userVendeur =  (Utilisateur) request.getSession().getAttribute("userVendeur");
 			boolean isMonEnchere = false;
 			
-			Article_vendu article = (Article_vendu)request.getAttribute("article");
+			Article_vendu article = (Article_vendu)request.getSession().getAttribute("article");
 			
 			if (request.getParameter("prixVente") != null) {
 				
@@ -82,9 +82,7 @@ public class Encherir extends HttpServlet {
 					} else {
 						System.out.println("La prix est bon");
 						
-						String idArticleString = (String)(request.getAttribute("idArticle"));
-						
-						int idArticle = Integer.parseInt(idArticleString);
+						int idArticle = article.getNo_Article();
 						
 						
 						

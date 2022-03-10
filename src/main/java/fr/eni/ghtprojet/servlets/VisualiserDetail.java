@@ -54,6 +54,7 @@ public class VisualiserDetail extends HttpServlet {
 		try {
 			mger = new ArticleManager();
 			article = mger.selectById(idArticle);
+			request.getSession().setAttribute("article", article );
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -65,11 +66,10 @@ public class VisualiserDetail extends HttpServlet {
 			EnchereManager mgerEnch = new EnchereManager();
 			
 			categorie = mger.selectById1(article.getNo_Categorie());
-				request.setAttribute("libelle", categorie );
-				request.setAttribute("article", article );
-				user = mgerUser.selectById(article.getNo_Utilisateur());
-				request.setAttribute("userVendeur", user);
-		request.getRequestDispatcher("/WEB-INF/jsp/detailvente.jsp").forward(request, response);
+			request.getSession().setAttribute("libelle", categorie );
+			user = mgerUser.selectById(article.getNo_Utilisateur());
+			request.getSession().setAttribute("userVendeur", user);
+		    request.getRequestDispatcher("/WEB-INF/jsp/detailvente.jsp").forward(request, response);
 	
 		} catch (Exception e) {
 			e.printStackTrace();

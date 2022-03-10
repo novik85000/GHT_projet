@@ -12,9 +12,8 @@
 <body>
 <header>
 
-<<<<<<< HEAD
 <%if ((String)request.getAttribute("messageEnchere") != null){
-			message = (String)request.getSession().getAttribute("messageEnchere");
+			message = (String)request.getAttribute("messageEnchere");
 		}
 		%>
 		<span style = "color: red;"> <%=message%> </span>
@@ -35,11 +34,13 @@
 </header>
 <%! public String message = " "; %>
 <%Article_vendu article = null;
-	article = (Article_vendu)request.getAttribute("article");
+	article = (Article_vendu)request.getSession().getAttribute("article");
+	System.out.println("Article dans jsp " + article);
+	request.setAttribute("article", article);
 	Categorie categorie = null;
-	categorie = (Categorie)request.getAttribute("libelle");
+	categorie = (Categorie)request.getSession().getAttribute("libelle");
 	Utilisateur user = null;
-	user= (Utilisateur)request.getAttribute("userVendeur");
+	user= (Utilisateur)request.getSession().getAttribute("userVendeur");
 	int placeholder = 0;
 	if (article!= null) {
 		if (article.getMiseAPrix()>article.getPrixVente()) {
