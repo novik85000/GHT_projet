@@ -228,7 +228,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 			}
 			connection.close();
 			} catch (Exception e) {
-				System.out.println("Erreur de se connecter");
+				System.out.println("se connecter a reussi");
 			}
 		
 		return user;

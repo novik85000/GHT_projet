@@ -34,8 +34,8 @@
                 <br>
          
 			 <div>
-   				<label for="file">Uploader</label>
-   				<input type="file" id="file" name="file" multiple accept=".png, .jpg, .jpeg">
+   				<label for="file-img">Uploader</label>
+   				<input name="image" type="file" class="upload" id="photo-upload"/>
             </div>
             	<br>
             <div class="control-form">

@@ -73,6 +73,10 @@ public class VendreObjetServlet extends HttpServlet {
 		
 		String ville = request.getParameter("ville").trim();
 		
+		String image = request.getParameter("image");
+		
+		System.out.println(image);
+		
 		if (ville.equals("") || ville == null) {
 			ville = user.getVille();
 		}
