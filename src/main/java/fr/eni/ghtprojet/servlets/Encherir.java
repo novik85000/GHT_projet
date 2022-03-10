@@ -66,14 +66,14 @@ public class Encherir extends HttpServlet {
 			Utilisateur userVendeur =  (Utilisateur) request.getSession().getAttribute("userVendeur");
 			boolean isMonEnchere = false;
 			
-			Article_vendu article = (Article_vendu)request.getSession().getAttribute("article");
+			Article_vendu article = (Article_vendu)request.getAttribute("article");
 			
 			if (request.getParameter("prixVente") != null) {
 				
 				
 				prixVente = Integer.parseInt(request.getParameter("prixVente"));
 				System.out.println("Prix vente" + prixVente);
-				request.getSession().setAttribute("messageEnchere", "");
+				request.setAttribute("messageEnchere", "");
 				
 				if (prixVente <= article.getMiseAPrix() || 
 						prixVente <= article.getPrixVente() ) {
@@ -82,7 +82,7 @@ public class Encherir extends HttpServlet {
 					} else {
 						System.out.println("La prix est bon");
 						
-						String idArticleString = (String)(request.getSession().getAttribute("idArticle"));
+						String idArticleString = (String)(request.getAttribute("idArticle"));
 						
 						int idArticle = Integer.parseInt(idArticleString);
 						
@@ -137,7 +137,7 @@ public class Encherir extends HttpServlet {
 				
 					}
 					
-		request.getSession().setAttribute("messageEnchere", message);
+		request.setAttribute("messageEnchere", message);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

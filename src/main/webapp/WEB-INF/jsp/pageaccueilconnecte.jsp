@@ -64,11 +64,24 @@
   </form>
   </div>
   <div class="row">
+<<<<<<< HEAD
    <%! public List <Article_vendu> listeArticles = null;
   public List <Article_vendu> listeArticlesApresFiltre = null;%>
   <%  listeArticles = (List <Article_vendu>)request.getAttribute("listeArticles"); %>
   <% if (listeArticles != null) { 
 	  for (int i = 0; i<listeArticles.size(); i++) { %>
+=======
+  <%! public List <Article_vendu> listArticles = null;  %>
+  <%  if ((List <Article_vendu>)request.getAttribute("articleApresFiltre") == null){
+	   		listArticles = (List <Article_vendu>)request.getAttribute("listeArticles");
+	   		} else {
+	   			listArticles = (List <Article_vendu>)request.getAttribute("articleApresFiltre");
+	   		}
+	   		
+	   		%>
+  <% if (listArticles != null) { 
+	  for (int i = 0; i<listArticles.size(); i++) { %>
+>>>>>>> branch 'main' of https://github.com/novik85000/GHT_projet2.git
     <div class="col col-6">
      <div class="card" style="width: 18rem;">
 		  <img src="<%=request.getContextPath()%>/images/imageAuction.png" class="card-img-top" alt="image" style="width: 5vw;">

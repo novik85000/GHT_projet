@@ -12,8 +12,13 @@
 <body>
 <header>
 
+<<<<<<< HEAD
 <%if ((String)request.getAttribute("messageEnchere") != null){
 			message = (String)request.getSession().getAttribute("messageEnchere");
+=======
+<%if ((String)request.getSession().getAttribute("messageEnchere") != null){
+			message = (String)request.getAttribute("messageEnchere");
+>>>>>>> branch 'main' of https://github.com/novik85000/GHT_projet2.git
 		}
 		%>
 		<span style = "color: red;"> <%=message%> </span>
