@@ -8,6 +8,7 @@ import fr.eni.ghtprojet.bo.Categorie;
 import fr.eni.ghtprojet.bo.Retrait;
 import fr.eni.ghtprojet.bo.Utilisateur;
 import fr.eni.ghtprojet.dal.ArticleDAO;
+import fr.eni.ghtprojet.dal.DALException;
 import fr.eni.ghtprojet.dal.DAOFactory;
 import fr.eni.ghtprojet.dal.UtilisateurDAO;
 
@@ -26,7 +27,7 @@ public class ArticleManager {
 		return instance;
 	}
 	
-	public void insert(Article_vendu article, Retrait retrait) throws SQLException {
+	public void insert(Article_vendu article, Retrait retrait) throws DALException {
 		dao.insert(article, retrait);
 	
 	}
@@ -39,7 +40,7 @@ public class ArticleManager {
 		return dao.SelectAll();
 	}
 	
-	public Categorie selectById1 (int no_categorie) {
+	public Categorie selectById1 (int no_categorie)throws DALException  {
 		return dao.selectById1(no_categorie);
 	}
 }
