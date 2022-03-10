@@ -99,6 +99,8 @@ public class VendreObjetServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		System.out.println("user apres vendre" + (Utilisateur)request.getSession().getAttribute("user"));
 
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/pageaccueilconnecte.jsp");
 		rd.forward(request, response);

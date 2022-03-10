@@ -133,7 +133,7 @@ public class ModifierProfil extends HttpServlet {
 				System.out.println(userUpdate);
 				request.setAttribute("messageErreur", messageErreur);
 				request.getSession().setAttribute("user", userUpdate);
-				//response.sendRedirect(request.getContextPath() + "/afficherprofil");
+				response.sendRedirect(request.getContextPath() + "/afficherprofil");
 			} catch (Exception e) {
 				e.printStackTrace();
 		
@@ -142,11 +142,12 @@ public class ModifierProfil extends HttpServlet {
 		} else {
 			
 			messageErreur = "Le mot de passe n'est pas valide";
-			response.sendRedirect(request.getContextPath() + "/modifierprofil");
 			request.setAttribute("messageErreur", messageErreur);
+			response.sendRedirect(request.getContextPath() + "/modifierprofil");
 			
 		}
 		
+		//request.getRequestDispatcher(request.getContextPath() + "/afficherprofil").forward(request, response);
 		
 		
 	} 

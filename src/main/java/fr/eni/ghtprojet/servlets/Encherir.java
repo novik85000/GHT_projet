@@ -62,6 +62,9 @@ public class Encherir extends HttpServlet {
 			
 			EnchereManager mgerEnch = new EnchereManager();
 			ArticleManager mgerArt = new ArticleManager();
+			Utilisateur userCourant =  (Utilisateur) request.getSession().getAttribute("user");
+			Utilisateur userVendeur =  (Utilisateur) request.getSession().getAttribute("userVendeur");
+			boolean isMonEnchere = false;
 			
 			Article_vendu article = (Article_vendu)request.getSession().getAttribute("article");
 			
@@ -84,7 +87,7 @@ public class Encherir extends HttpServlet {
 						int idArticle = Integer.parseInt(idArticleString);
 						
 						
-						Utilisateur userCourant =  (Utilisateur) request.getSession().getAttribute("user");
+						
 						int paramNoUtil = userCourant.getNo_Utilisateur();
 						
 						LocalDateTime currentDateTime = LocalDateTime.now();
@@ -99,29 +102,39 @@ public class Encherir extends HttpServlet {
 						Encheres enchereById = mgerEnch.selectById(idArticle);
 						
 						System.out.println(enchereById);
+						
+						
+						if (userVendeur.getNo_Utilisateur() == enchere.getNo_utilisateur()) {
+							message = "Vous ne pouvez pas enchirir sur votre article";
+							isMonEnchere = true;
+							
+						}
 					
 						
-						if (enchereById == null) {
+						if (enchereById == null && isMonEnchere == false) {
 							System.out.println("User n'a pas encore enchere ");
 							mgerEnch.insert(enchere);
 							mgerArt.update(enchere);
 							message = "Votre enchere a passe avec succes, vous allez être redirigez sur page d'accueil";
 							System.out.println("insertion a reussi");
-						} else if (userCourant.getNo_Utilisateur()!= enchereById.getNo_utilisateur()){
+						} else if (userCourant.getNo_Utilisateur()!= enchereById.getNo_utilisateur() && isMonEnchere == false){
 							System.out.println("User deja enchere ");
 							mgerEnch.update(enchere);
 							mgerArt.update(enchere);
 							System.out.println("Update a reusi");
 							message = "Votre enchere a passe avec succes, vous allez être redirigez sur page d'accueil";
 						}
-							else {
+							else if (isMonEnchere == false){
 								System.out.println("Utilisateur a deja encheri sur cet article (dernière enchère)");
 								message = "Vous avez deja enchere sur cette article";
 							}
 							
 						
 					}
-						
+					
+					
+				
+				
 					}
 					
 		request.getSession().setAttribute("messageEnchere", message);
